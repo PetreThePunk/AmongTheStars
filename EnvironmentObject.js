@@ -37,6 +37,7 @@ game.EnvironmentObject = function() {
 			this.solveThreshold = clicksToSolve;
 			this.currentSolveClicks = 0;
 			this.solved = false;
+			
 		}
 		/*
 		function EnvironmentObject(setName, setGraphics, setLocation, setObjectSolution)

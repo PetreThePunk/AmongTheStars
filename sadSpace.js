@@ -25,10 +25,11 @@
 	lefBoundry: 0,
 	topBoundry: 240,
 	bottomBoundry: 480,
+	environmentObjs: [],
+	mouse: { x: 0, y: 0 },
 	
 	// methods
 	/** Sets up that main game, including the canvas and all of the menus
-	 *
 	 *
 	 */
 	init: function( ) {
@@ -40,12 +41,18 @@
 		this.ctx = this.canvas.getContext( '2d' );
 		this.player = this.game.player;
 		
+		this.environmentObjs[0] = { x: 250, y: 250 }; 
+		
 		//Set up mouse click - move this when items are added
 		var self = this;
 		this.canvas.addEventListener("mouseup", function(e) {
 			var mouse = self.getMouse(e);
 			if( self.checkWalkPos( mouse.x, mouse.y ) )
 				self.player.setTarget(mouse.x, mouse.y);
+		});
+		
+		this.canvas.addEventListener("mousemove", function(e) {
+			self.mouse = self.getMouse(e);
 		});
 		
 		this.update();
@@ -86,6 +93,7 @@
 
 		this.player.draw(this.ctx);
 		
+		this.drawInteractionCircle(this.environmentObjs[0]);
 	},
 	/** Handles moving for all moveable objs in the game
 	 *
@@ -128,5 +136,23 @@
 			return false;
 		else
 			return true;
+	},
+	
+	drawInteractionCircle: function( obj ) {
+		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
+		this.ctx.fillStyle = "#00b";
+		if( distSq < 400 ) {
+			this.ctx.beginPath();
+			this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
+			this.ctx.fill();
+			this.ctx.closePath();
+		}
+		
+		this.ctx.strokeStyle = "#00b";
+		this.ctx.lineWidth = 1;
+		this.ctx.beginPath();
+		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
+		this.ctx.stroke();
+		this.ctx.closePath();
 	}
  };
