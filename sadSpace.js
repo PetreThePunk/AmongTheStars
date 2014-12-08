@@ -47,12 +47,15 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(350, 250, "test obj", "no graphics rn", "test location", true);
+		var testInvObject = new game.InventoryObject(350, 250, "test invobj", "no graphics rn", "test location", true);
 		this.inventoryObjs.push(testInvObject);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "test obj", "no graphics rn", "test location", testInvObject);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "test location", testInvObject);
 		this.environmentObjs.push(testEnviroObject);
 		
+		var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "test location");
+		this.environmentObjs.push(testControlPanel);
+
 		//Set up mouse click - move this when items are added(?)
 		var self = this;
 		this.canvas.addEventListener("mouseup", function(e) 
@@ -77,6 +80,13 @@
 			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
 			{
 				self.selectedObject.click(self.player, self.WIDTH / 6, 7 * self.HEIGHT / 8);
+				// reset selectedObject
+				self.selectedObject = undefined;
+			}
+			// Control Panel object
+			if(self.selectedObject && self.selectedObject instanceof game.ControlPanel)
+			{
+				self.selectedObject.click();
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
@@ -151,11 +161,11 @@
 		// Interactable objects
 		var objectIsSelected; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
-		{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[0], false);}
+			{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[0], false);}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
 		for(var i = 0; i < this.environmentObjs.length; i++)
-		{objectIsSelected = this.drawInteractionCircle(this.environmentObjs[0], objectIsSelected);}
+			{objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);}
 		
 		// if objectIsSelected is still false, selectedObject is therefore null!
 		if(!objectIsSelected) this.selectedObject = undefined;
@@ -206,6 +216,11 @@
 	drawInteractionCircle: function( obj, somethingSelected ) {
 		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
 		var objectIsSelected = somethingSelected; // used to update selection code
+		if(obj instanceof game.ControlPanel)
+		{
+			objectIsSelected = false;
+			obj.draw(this.ctx, this.WIDTH, this.HEIGHT);
+		}
 		this.ctx.fillStyle = "#00b";
 		
 		if( distSq < 400 ) 
