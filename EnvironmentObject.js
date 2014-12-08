@@ -3,42 +3,21 @@ var game = game || {};
 
 game.EnvironmentObject = function() {
 
-	/**
-		THIS IS POINTLESS
-		
-		
-		// Declare variables
-		var name;
-		var location;
-		var posX; var posY;
-
-		var relatedInvItem;     // An item to use on this object to "solve" it, when applicable
-		var solved;   			// A "solved" object no longer needs to be interacted with
-		var solveThreshold;     // For objects "solved" purely by clicking, activated when clicked this many times.
-		var currentSolveClicks; // This is only here as an edge case - clicking on a cabinet to open it + then again
-								// to take things out of it, for instance - and can be removed if irrelevant
-
-		var graphicSrc; // NOTE: This should be an ARRAY! Explained below.
-		var graphicSrcIndex;
-		var maxSrcIndex; var loopGraphics; // when to stop changing the sprite or go back to the original one
-
-
-	*/
 		// Constructors - one with a related inventory item, one without
-		function EnvironmentObject(setName, setGraphics, setLocation, clicksToSolve)
+		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, clicksToSolve)
 		{
-			
-			
 			this.name = setName;
 			this.graphicSrc = setGraphic;
 			this.graphicSrcIndex = 0;
+			
 			this.location = setLocation;
+			this.x = setX; this.y = setY;
 			
 			this.solveThreshold = clicksToSolve;
 			this.currentSolveClicks = 0;
 			this.solved = false;
 			
-		}
+		};
 		/*
 		function EnvironmentObject(setName, setGraphics, setLocation, setObjectSolution)
 		{
@@ -60,12 +39,13 @@ game.EnvironmentObject = function() {
 		in the MAIN method whether to draw them, rather than making it part of this
 		function. Probably for loop, checking this location against player location. */
 		p.draw = function(ctx)
-		{ ctx.drawImage(this.graphicSrc[graphicSrcIndex], this.posX, this.posY); }
+		{ ctx.drawImage(this.graphicSrc[graphicSrcIndex], this.posX, this.posY); };
 
 		// Clicked WHILE THE PLAYER IS NOT HOLDING AN ITEM
 		p.click = function(player)
 		{
-			// The object has already been "solved"
+			console.log("No code to handle environment object clicking yet");
+			/* // The object has already been "solved"
 			if(this.solved)
 			{
 				// display or play an "I don't need to do that" message
@@ -95,13 +75,15 @@ game.EnvironmentObject = function() {
 					this.solved = true;
 					// That should cover it, but if other code necessary, it can go here
 				}
-			}
-		}
+			} */
+		};
 
 		/* Clicked WHILE THE PLAYER IS HOLDING AN ITEM - check if it's the right one, and
 		proceed accordingly */
 		p.click = function(heldObject, player)
 		{
+			console.log("No code to handle environment object clicking yet");
+			
 			// The object has already been "solved"
 			if(this.solved)
 			{
@@ -119,5 +101,7 @@ game.EnvironmentObject = function() {
 			{
 				// display or play an "I can't use this" or "examine" message
 			}
-		}
+		};
+		
+		return EnvironmentObject;
 }();
