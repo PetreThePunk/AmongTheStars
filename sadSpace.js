@@ -161,7 +161,6 @@
 		var objectIsSelected; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
 		{
-		console.log(this.inventoryObjs[i].inInventory);
 			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory)
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
 		}
