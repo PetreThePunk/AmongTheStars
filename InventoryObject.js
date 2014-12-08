@@ -13,6 +13,7 @@ game.InventoryObject = function() {
 			this.location = initialRoom;
 			this.x = setX; this.y = setY;
 			this.isHeld = false; // defaults to outside of inventory
+			this.inInventory = false; 
 			
 			this.destroyOnUse = isoneuse;
 		};

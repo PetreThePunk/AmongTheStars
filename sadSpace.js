@@ -161,14 +161,14 @@
 		var objectIsSelected; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
 		{
-			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location)
+		console.log(this.inventoryObjs[i].inInventory);
+			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory)
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
 		}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
 		for(var i = 0; i < this.environmentObjs.length; i++)
 		{
-			console.log(this.environmentObjs[i].location);
 			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location)
 				objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);
 		}
