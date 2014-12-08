@@ -55,6 +55,12 @@
 		ctx.fillStyle = colorString;
 		ctx.strokeStyle = colorString;
 		
+		ctx.lineWidth = 2;
+		ctx.beginPath();
+		ctx.arc( x, y, 20, 0, 2*Math.PI );
+		ctx.stroke();
+		ctx.closePath();
+		
 		name = "Go To " + name;
 		
 		//Fill circle if mouse is over
@@ -69,11 +75,7 @@
 			ctx.fillText( name, player.x - (name.length/2 * 5), player.y + 15 ) 
 		}
 		
-		ctx.lineWidth = 2;
-		ctx.beginPath();
-		ctx.arc( x, y, 20, 0, 2*Math.PI );
-		ctx.stroke();
-		ctx.closePath();
+		
 	},
 	/**Draws an exit indicator
 	 *
@@ -107,8 +109,9 @@
 	changeRoom: function( player, roomNum ) {
 		console.log('ChangeRoom!');
 		this.currentRoom = roomNum;
-		//player.x = 
-		//player.y = 
+		player.x = 640 - player.x;
+		player.target.x = player.x;
+		player.target.y = player.y;
 	}
 	
  };

@@ -236,6 +236,14 @@
 
 		this.ctx.fillStyle = colr;
 		
+		
+		this.ctx.strokeStyle = colr;
+		this.ctx.lineWidth = 2;
+		this.ctx.beginPath();
+		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
+		this.ctx.stroke();
+		this.ctx.closePath();
+		
 		if( distSq < 400 ) 
 		{
 			this.ctx.beginPath();
@@ -245,14 +253,12 @@
 			
 			this.selectedObject = obj; // object will be referenced on click
 			objectIsSelected = true;
+			
+			this.ctx.font = '10px Veranda';
+			this.ctx.fillStyle = "#fff";
+			this.ctx.fillText( "Click This", this.mouse.x, this.mouse.y );
 		}
 		
-		this.ctx.strokeStyle = colr;
-		this.ctx.lineWidth = 2;
-		this.ctx.beginPath();
-		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
-		this.ctx.stroke();
-		this.ctx.closePath();
 		
 		return objectIsSelected;
 	}
