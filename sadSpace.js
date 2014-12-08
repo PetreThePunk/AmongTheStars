@@ -123,7 +123,7 @@
 		this.ctx.fillStyle = "#888";
 		this.ctx.fillRect(0,this.HEIGHT/2, this.WIDTH, this.HEIGHT/2);
 		
-		this.map.draw( this.ctx, this.mouse );
+		this.map.draw( this.ctx, this.mouse, this.player );
 		
 		// Player
 		this.player.draw(this.ctx);
@@ -137,7 +137,7 @@
 		
 		// Interactable objects
 		this.drawInteractionCircle(this.environmentObjs[0]);
-		this.drawInteractionCircle(this.environmentObjs[1]);
+		this.drawInteractionCircle(this.inventoryObjs[0]);
 	},
 	/** Handles moving for all moveable objs in the game
 	 *

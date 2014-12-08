@@ -52,6 +52,8 @@
 			ctx.arc( x, y, 20, 0, 2*Math.PI );
 			ctx.fill();
 			ctx.closePath();
+			
+			
 		}
 		
 		ctx.lineWidth = 2;
