@@ -34,8 +34,8 @@ game.ControlPanel = function() {
 			//on click, bring up control panel window if not selected, close if selected
 			if(!this.selected)
 				this.selected = true;
-			//else 
-				//this.selected = false;
+			else 
+				this.selected = false;
 		};
 		
 		//returns true if legal, false if not

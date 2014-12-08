@@ -161,7 +161,7 @@
 		// Interactable objects
 		var objectIsSelected; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
-			{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[0], false);}
+			{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
 		for(var i = 0; i < this.environmentObjs.length; i++)
@@ -221,7 +221,13 @@
 			objectIsSelected = false;
 			obj.draw(this.ctx, this.WIDTH, this.HEIGHT);
 		}
-		this.ctx.fillStyle = "#00b";
+		var colr = "#00b";
+		if(obj instanceof game.InventoryObject) 
+			colr = "#0bb";
+		else if(obj instanceof game.ControlPanel) 
+			colr = "#0b0";
+
+		this.ctx.fillStyle = colr;
 		
 		if( distSq < 400 ) 
 		{
@@ -234,7 +240,7 @@
 			objectIsSelected = true;
 		}
 		
-		this.ctx.strokeStyle = "#00b";
+		this.ctx.strokeStyle = colr;
 		this.ctx.lineWidth = 2;
 		this.ctx.beginPath();
 		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
