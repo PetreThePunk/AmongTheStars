@@ -32,7 +32,8 @@
 		thisRoom.draw( ctx );
 		player.draw( ctx );
 		thisRoom.exits.forEach( function( exit ) {
-			self.drawExitButton( ctx, exit.x, exit.y, mouse, thisRoom.name, player); 
+			self.drawExitButton( ctx, exit.x, exit.y, mouse, 
+								self.rooms[exit.room].name, player); 
 		});
 		
 	},
@@ -54,6 +55,8 @@
 		ctx.fillStyle = colorString;
 		ctx.strokeStyle = colorString;
 		
+		name = "Go To " + name;
+		
 		//Fill circle if mouse is over
 		if( this.checkMouseHover( x, y, 20, mouse ) ) {
 			ctx.beginPath();
@@ -61,7 +64,9 @@
 			ctx.fill();
 			ctx.closePath();
 			
-			
+			ctx.font = "10px Veranda";
+			ctx.fillStyle = "#fff";
+			ctx.fillText( name, player.x - (name.length/2 * 5), player.y + 15 ) 
 		}
 		
 		ctx.lineWidth = 2;
