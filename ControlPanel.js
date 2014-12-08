@@ -4,10 +4,11 @@ var game = game || {};
 game.ControlPanel = function() {
 
 		// Constructor
-		function ControlPanel(setX, setY, setName, initialRoom)
+		function ControlPanel(setX, setY, setName, setGraphic, initialRoom)
 		{
 			this.name = setName;
 			this.location = initialRoom;
+			this.graphicSrc = setGraphic;
 			this.x = setX; this.y = setY;
 			this.code = ["_","_","_","_"];
 			this.selected = false;

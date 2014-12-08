@@ -47,13 +47,13 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(350, 250, "test invobj", "no graphics rn", "test location", true);
+		var testInvObject = new game.InventoryObject(350, 250, "test invobj", "no graphics rn", "Docking Bay", true);
 		this.inventoryObjs.push(testInvObject);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "test location", testInvObject);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "Airlock", testInvObject);
 		this.environmentObjs.push(testEnviroObject);
 		
-		var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "test location");
+		var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
 		this.environmentObjs.push(testControlPanel);
 
 		//Set up mouse click - move this when items are added(?)
@@ -161,11 +161,18 @@
 		// Interactable objects
 		var objectIsSelected; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
-			{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);}
+		{
+			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location)
+				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
+		}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
 		for(var i = 0; i < this.environmentObjs.length; i++)
-			{objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);}
+		{
+			console.log(this.environmentObjs[i].location);
+			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location)
+				objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);
+		}
 		
 		// if objectIsSelected is still false, selectedObject is therefore null!
 		if(!objectIsSelected) this.selectedObject = undefined;

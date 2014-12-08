@@ -21,7 +21,7 @@
 						{ left: 10, right: 630, top: 240, bot: 480 }, 
 						[{ x: 630, y: 300, room: 0}] );
 						
-		this.rooms[2] = new game.Room("Doors?", "nada",
+		this.rooms[2] = new game.Room("Doors", "nada",
 						{ left: 10, right: 630, top: 240, bot: 480 }, 
 						[{ x: 10, y: 300, room: 0}] );
 	},
