@@ -66,6 +66,12 @@
 		
 		this.x += dVec.x;
 		this.y += dVec.y;
+	},
+	
+	inRange: function( x, y ) {
+		var distSq = ( x - this.x ) * ( x - this.x ) +
+						( y - this.y ) * ( y - this.y );
+		return ( distSq < 400 );
 	}
 	
  };
