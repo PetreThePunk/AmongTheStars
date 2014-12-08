@@ -71,11 +71,18 @@
 	},
 	
 	checkExits: function( mouse, player ) {
-		
+		var thisRoom = this.rooms[this.currentRoom];
+		var self = this;
+		thisRoom.exits.forEach( function(exit) {
+			if( player.inRange( exit.x, exit.y) && 
+				checkMouseHover( exit.x, exit.y, 20, mouse) ){
+					self.changeRoom( player );
+			}
+		});
 	},
 	
 	changeRoom: function( player ) {
-	
+		console.log('ChangeRoom!');
 	}
 	
  };
