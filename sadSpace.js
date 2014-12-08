@@ -14,6 +14,7 @@
 	// Other Properties
 	game: undefined,
 	player: undefined,
+	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
 	canvas: undefined,
 	ctx: undefined,
@@ -39,7 +40,9 @@
 		this.canvas.width = this.WIDTH;
 		this.canvas.height = this.HEIGHT;
 		this.ctx = this.canvas.getContext( '2d' );
+		
 		this.player = this.game.player;
+		this.map = this.game.map;
 		
 		this.environmentObjs[0] = { x: 250, y: 250 }; 
 		
@@ -90,7 +93,9 @@
 		this.ctx.fillRect(0,0, this.WIDTH, this.HEIGHT);
 		this.ctx.fillStyle = "#888";
 		this.ctx.fillRect(0,this.HEIGHT/2, this.WIDTH, this.HEIGHT/2);
-
+		
+		this.map.draw( this.ctx, this.mouse );
+		
 		this.player.draw(this.ctx);
 		
 		this.drawInteractionCircle(this.environmentObjs[0]);
@@ -141,6 +146,7 @@
 	drawInteractionCircle: function( obj ) {
 		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
 		this.ctx.fillStyle = "#00b";
+		
 		if( distSq < 400 ) {
 			this.ctx.beginPath();
 			this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
@@ -149,7 +155,7 @@
 		}
 		
 		this.ctx.strokeStyle = "#00b";
-		this.ctx.lineWidth = 1;
+		this.ctx.lineWidth = 2;
 		this.ctx.beginPath();
 		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
 		this.ctx.stroke();

@@ -23,6 +23,7 @@ window.onload = function() {
 	//hook up everything
 	game.SadSpace.game = game;
 	game.player.init();
+	game.map.init();
 	
 	//INIT SADSPACE
 	game.SadSpace.init();

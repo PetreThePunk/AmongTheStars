@@ -54,5 +54,5 @@ game.InventoryObject = function() {
 				this.isActive = true;
 			}
 		}
-
+}();
 		// Function to move w/ mouse cursor? Can probably be handled all in the main.

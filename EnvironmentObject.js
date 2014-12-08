@@ -120,4 +120,4 @@ game.EnvironmentObject = function() {
 				// display or play an "I can't use this" or "examine" message
 			}
 		}
-}
+}();
