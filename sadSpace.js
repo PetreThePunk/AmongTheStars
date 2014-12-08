@@ -27,7 +27,7 @@
 	rightBoundry: 640,
 	leftBoundry: 0,
 	topBoundry: 240,
-	bottomBoundry: 480,
+	bottomBoundry: 360,
 	environmentObjs: [],
 	inventoryObjs: [],
 	mouse: { x: 0, y: 0 },
