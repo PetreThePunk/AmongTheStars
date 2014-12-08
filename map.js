@@ -36,18 +36,25 @@
 		});
 		
 	},
-	/**Draws an exit param
+	/**Draws an exit indicator
+	 *
+	 *@param ctx : drawing context
+	 *@param x : x coord of exit button
+	 *@param y : y coord of exit button
+	 *@param mouse : mosue location obj
+	 *@param name : name of exit
+	 *@param player : player obj
 	 */
 	drawExitButton: function( ctx, x, y, mouse, name, player ) {
 		var colorString = "#a00";
-		
+		//If player can exit change indiactor color
 		if( player.inRange( x, y ) )
 			colorString = "#0a0";
 		
 		ctx.fillStyle = colorString;
 		ctx.strokeStyle = colorString;
 		
-		
+		//Fill circle if mouse is over
 		if( this.checkMouseHover( x, y, 20, mouse ) ) {
 			ctx.beginPath();
 			ctx.arc( x, y, 20, 0, 2*Math.PI );
@@ -63,7 +70,15 @@
 		ctx.stroke();
 		ctx.closePath();
 	},
-	
+	/**Draws an exit indicator
+	 *
+	 *@param ctx : drawing context
+	 *@param x : x coord of exit button
+	 *@param y : y coord of exit button
+	 *@param mouse : mosue location obj
+	 *@param name : name of exit
+	 *@param player : player obj
+	 */
 	checkMouseHover: function( x, y, radius, mouse ) {
 		var distSq = ( x - mouse.x ) * ( x - mouse.x ) +
 					 ( y - mouse.y ) * ( y - mouse.y );
@@ -76,13 +91,16 @@
 		thisRoom.exits.forEach( function(exit) {
 			if( player.inRange( exit.x, exit.y) && 
 				checkMouseHover( exit.x, exit.y, 20, mouse) ){
-					self.changeRoom( player );
+					self.changeRoom( player, exit.room );
 			}
 		});
 	},
 	
-	changeRoom: function( player ) {
+	changeRoom: function( player, roomNum ) {
 		console.log('ChangeRoom!');
+		currentRoom = roomNum;
+		//player.x = 
+		//player.y = 
 	}
 	
  };
