@@ -125,9 +125,6 @@
 		
 		this.map.draw( this.ctx, this.mouse, this.player );
 		
-		// Player
-		this.player.draw(this.ctx);
-		
 		// Inventory
 		this.ctx.save();
 		this.ctx.fillStyle = "#555";

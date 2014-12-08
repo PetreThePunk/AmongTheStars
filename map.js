@@ -30,6 +30,7 @@
 		var self = this;
 		var thisRoom = this.rooms[this.currentRoom];
 		thisRoom.draw( ctx );
+		player.draw( ctx );
 		thisRoom.exits.forEach( function( exit ) {
 			self.drawExitButton( ctx, exit.x, exit.y, mouse, thisRoom.name, player); 
 		});
