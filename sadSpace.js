@@ -255,7 +255,8 @@
 			
 			this.ctx.font = '10px Veranda';
 			this.ctx.fillStyle = "#fff";
-			this.ctx.fillText( "Click This", this.mouse.x, this.mouse.y );
+			this.ctx.fillText( obj.name, this.mouse.x, this.mouse.y );
+			//console.log(obj.name);
 		}
 		
 		this.mouseOnObj = objectIsSelected;
