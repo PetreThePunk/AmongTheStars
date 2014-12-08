@@ -50,7 +50,7 @@
 		var testInvObject = new game.InventoryObject(350, 250, "test invobj", "no graphics rn", "Docking Bay", true);
 		this.inventoryObjs.push(testInvObject);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "Airlock", testInvObject);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "Airlock", 1, testInvObject);
 		this.environmentObjs.push(testEnviroObject);
 		
 		var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
@@ -71,7 +71,7 @@
 				// later we'll need either a for loop, or a player variable that references a held item
 				// for now we only have one inventory object, so...
 				if(self.inventoryObjs[0].isHeld) self.selectedObject.click(self.inventoryObjs[0], self.player);
-				else self.selectedObject.click(self.player);
+				else self.selectedObject.click(false, self.player);
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}

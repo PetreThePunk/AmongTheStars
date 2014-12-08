@@ -67,7 +67,6 @@ game.InventoryObject = function() {
 		// NEEDS TO BE SPLICED FROM THE ASSOCIATED ARRAY
 		p.deleteMe = function()
 		{ 
-			console.log("It... should delete the item now"); 
 			// remove it from the array
 			var arrayLoc = game.SadSpace.inventoryObjs.indexOf(this);
 			game.SadSpace.inventoryObjs.splice(arrayLoc, 1);

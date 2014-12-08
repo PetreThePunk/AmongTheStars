@@ -4,7 +4,7 @@ var game = game || {};
 game.EnvironmentObject = function() {
 
 		// Constructors - one with a related inventory item, one without
-		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, clicksToSolve)
+		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, clicksToSolve, setObjectSolution)
 		{
 			this.name = setName;
 			this.graphicSrc = setGraphic;
@@ -14,25 +14,12 @@ game.EnvironmentObject = function() {
 			this.x = setX; this.y = setY;
 			
 			this.solveThreshold = clicksToSolve;
+			this.relatedInvItem = setObjectSolution;
 			this.currentSolveClicks = 0;
 			this.solved = false;
 			
 		};
 		
-		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, setObjectSolution)
-		{
-			this.name = setName;
-			this.graphicSrc = setGraphic;
-			this.graphicSrcIndex = 0;
-			
-			this.location = setLocation;
-			this.x = setX; this.y = setY;
-			
-			this.relatedInvItem = setObjectSolution;
-			
-			this.solved = false;
-		}
-
 		var p = EnvironmentObject.prototype;
 		
 		/* Draws the item to the screen - only happens if it's in the player
@@ -43,63 +30,40 @@ game.EnvironmentObject = function() {
 		p.draw = function(ctx)
 		{ ctx.drawImage(this.graphicSrc[graphicSrcIndex], this.posX, this.posY); };
 
-		// Clicked WHILE THE PLAYER IS NOT HOLDING AN ITEM
-		p.click = function(player)
-		{
-			console.log("No code to handle environment object clicking yet");
-			/* // The object has already been "solved"
-			if(this.solved)
-			{
-				// display or play an "I don't need to do that" message
-			}
-			// An inventory item IS necessary to use this object
-			else if(this.relatedInvItem)
-			{
-				// display or play an "I can't use this" message
-			}
-			// An inventory item IS NOT necessary to use this object
-			else
-			{
-				// USE ANIMATION FOR PLAYER OBJECT?
-				
-				// Change this object's graphic accordingly
-				this.graphicSrcIndex += 1;
-				if(this.graphicSrcIndex == this.maxSrcIndex)
-				{
-					if(this.loopGraphics) {this.graphicSrcIndex = 0;}
-					else {this.graphicSrcIndex -= 1;}
-				}
-				
-				// Increase currentSolveClicks, solving the object if the threshold is reached
-				this.currentSolveClicks += 1;
-				if(this.currentSolveClicks >= this.solveThreshold)
-				{
-					this.solved = true;
-					// That should cover it, but if other code necessary, it can go here
-				}
-			} */
-		};
-
-		/* Clicked WHILE THE PLAYER IS HOLDING AN ITEM - check if it's the right one, and
-		proceed accordingly */
+		/* Clicked by player - check if item is needed and if player has right one */
 		p.click = function(heldObject, player)
 		{
-			console.log("No code to handle environment object clicking yet");
-			
 			// The object has already been "solved"
 			if(this.solved)
 			{
 				// display or play an "I don't need to do that" message
 			}
-			// The player is using the correct inventory item on this object
-			else if(this.relatedInvItem == heldObject)
+			// An item is needed AND The player is using the correct inventory item on this object
+			else if(this.relatedInvItem != false && this.relatedInvItem == heldObject)
 			{
-				console.log("Aha!");
+				console.log("Solved by item");
 				// USE ANIMATION FOR PLAYER OBJECT?
 				// Solve this object
 				this.solved = true;
 				// If the inventory item is one-use, delete it
 				if(heldObject.destroyOnUse) heldObject.deleteMe();
+			}
+			//An item is NOT needed and the player has clicked on it
+			else if(!this.relatedInvItem)
+			{
+				this.currentSolveClicks++;
+				//check clicks to solve vs current clicks
+				if(this.currentSolveClicks<this.solveThreshold)
+				{
+					console.log("Need more clicks!");
+					//more clicks are needed!
+				}
+				else
+				{
+					console.log("Solved by clicks!");
+					//we have the right number of clicks!
+					this.solved = true;
+				}
 			}
 			// The player is NOT using the correct inventory item on this object
 			else
