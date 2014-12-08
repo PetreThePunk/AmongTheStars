@@ -47,13 +47,13 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "test obj", "no graphics rn", "test location", 1);
-		this.environmentObjs.push(testEnviroObject);
-		
-		var testInvObject = new game.InventoryObject(350, 250, "test obj", "no graphics rn", "test location");
+		var testInvObject = new game.InventoryObject(350, 250, "test obj", "no graphics rn", "test location", true);
 		this.inventoryObjs.push(testInvObject);
 		
-		//Set up mouse click - move this when items are added
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "test obj", "no graphics rn", "test location", testInvObject);
+		this.environmentObjs.push(testEnviroObject);
+		
+		//Set up mouse click - move this when items are added(?)
 		var self = this;
 		this.canvas.addEventListener("mouseup", function(e) 
 		{
@@ -62,16 +62,23 @@
 				self.player.setTarget(mouse.x, mouse.y);
 			
 			// if an object is selected, call its click function
-			// Inventory object
-			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
-			{
-				self.selectedObject.click(self.player, self.WIDTH / 6, 7 * self.HEIGHT / 8);
-			}
 			// Environment object - later, need to set up code to determine if it's being clicked
 			// with an object in hand
 			if(self.selectedObject && self.selectedObject instanceof game.EnvironmentObject)
 			{
-				self.selectedObject.click();
+				// later we'll need either a for loop, or a player variable that references a held item
+				// for now we only have one inventory object, so...
+				if(self.inventoryObjs[0].isHeld) self.selectedObject.click(self.inventoryObjs[0], self.player);
+				else self.selectedObject.click(self.player);
+				// reset selectedObject
+				self.selectedObject = undefined;
+			}
+			// Inventory object
+			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
+			{
+				self.selectedObject.click(self.player, self.WIDTH / 6, 7 * self.HEIGHT / 8);
+				// reset selectedObject
+				self.selectedObject = undefined;
 			}
 		});
 		
@@ -123,7 +130,10 @@
 		this.ctx.fillStyle = "#888";
 		this.ctx.fillRect(0,this.HEIGHT/2, this.WIDTH, this.HEIGHT/2);
 		
-		this.map.draw( this.ctx, this.mouse, this.player );
+		this.map.draw( this.ctx, this.mouse );
+		
+		// Player
+		this.player.draw(this.ctx);
 		
 		// Inventory
 		this.ctx.save();
@@ -133,8 +143,16 @@
 		this.ctx.restore();
 		
 		// Interactable objects
-		this.drawInteractionCircle(this.environmentObjs[0]);
-		this.drawInteractionCircle(this.inventoryObjs[0]);
+		var objectIsSelected; // used for determining which object is actually selected
+		for(var i = 0; i < this.inventoryObjs.length; i++)
+		{objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[0], false);}
+		// Resolve environment objects SECOND so they can be selected while holding something
+		// (unless a better way comes up)
+		for(var i = 0; i < this.environmentObjs.length; i++)
+		{objectIsSelected = this.drawInteractionCircle(this.environmentObjs[0], objectIsSelected);}
+		
+		// if objectIsSelected is still false, selectedObject is therefore null!
+		if(!objectIsSelected) this.selectedObject = undefined;
 	},
 	/** Handles moving for all moveable objs in the game
 	 *
@@ -179,8 +197,9 @@
 			return true;
 	},
 	
-	drawInteractionCircle: function( obj ) {
+	drawInteractionCircle: function( obj, somethingSelected ) {
 		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
+		var objectIsSelected = somethingSelected; // used to update selection code
 		this.ctx.fillStyle = "#00b";
 		
 		if( distSq < 400 ) 
@@ -191,9 +210,8 @@
 			this.ctx.closePath();
 			
 			this.selectedObject = obj; // object will be referenced on click
+			objectIsSelected = true;
 		}
-		else
-		{this.selectedObject = undefined;} // object will NOT be referenced on click
 		
 		this.ctx.strokeStyle = "#00b";
 		this.ctx.lineWidth = 2;
@@ -201,5 +219,7 @@
 		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
 		this.ctx.stroke();
 		this.ctx.closePath();
+		
+		return objectIsSelected;
 	}
  };

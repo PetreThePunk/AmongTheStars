@@ -5,7 +5,7 @@ game.InventoryObject = function() {
 	
 		
 		// Constructor
-		function InventoryObject(setX, setY, setName, setGraphic, initialRoom)
+		function InventoryObject(setX, setY, setName, setGraphic, initialRoom, isoneuse)
 		{
 			this.name = setName;
 			this.graphicSrc = setGraphic;
@@ -13,6 +13,8 @@ game.InventoryObject = function() {
 			this.location = initialRoom;
 			this.x = setX; this.y = setY;
 			this.isHeld = false; // defaults to outside of inventory
+			
+			this.destroyOnUse = isoneuse;
 		};
 
 		var p = InventoryObject.prototype;
@@ -29,22 +31,17 @@ game.InventoryObject = function() {
 			if(this.isHeld)
 			{
 				this.x = mouseX; this.y = mouseY;
-				console.log("is hold"); 
 			}
 			
 			if(this.inInventory || location == playerLocation)
 			{
-				console.log("hey");
-				// ctx.drawImage(this.graphicSrc, this.posX, this.posY);
+				// ctx.drawImage(this.graphicSrc, this.x, this.y);
 			}
 		};
 
 		/* When clicked (collision check should be done in main, imo), see if
 		the item is in the inventory or not: if not, pick it up, and if so,
-		select it. 
-		
-		Might want to define inventorySlot position internally, but for now,
-		just testing */
+		select it. */
 		p.click = function(player, inventorySlotX, inventorySlotY)
 		{
 			if(this.inInventory == false)
@@ -63,6 +60,18 @@ game.InventoryObject = function() {
 				this.x = inventorySlotX; this.y = inventorySlotY; // return it to the inventory
 			}
 			else{this.isHeld = true;}
+		};
+		
+		// Deletes this object (when a consumable is successfully used)
+		// NEEDS TO BE SPLICED FROM THE ASSOCIATED ARRAY
+		p.deleteMe = function()
+		{ 
+			console.log("It... should delete the item now"); 
+			// remove it from the array
+			var arrayLoc = game.SadSpace.inventoryObjs.indexOf(this);
+			game.SadSpace.inventoryObjs.splice(arrayLoc, 1);
+			// delete the object itself
+			delete this; 
 		};
 		
 		return InventoryObject;

@@ -18,18 +18,20 @@ game.EnvironmentObject = function() {
 			this.solved = false;
 			
 		};
-		/*
-		function EnvironmentObject(setName, setGraphics, setLocation, setObjectSolution)
+		
+		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, setObjectSolution)
 		{
 			this.name = setName;
 			this.graphicSrc = setGraphic;
 			this.graphicSrcIndex = 0;
+			
 			this.location = setLocation;
+			this.x = setX; this.y = setY;
+			
 			this.relatedInvItem = setObjectSolution;
 			
 			this.solved = false;
 		}
-		*/
 
 		var p = EnvironmentObject.prototype;
 		
@@ -92,9 +94,12 @@ game.EnvironmentObject = function() {
 			// The player is using the correct inventory item on this object
 			else if(this.relatedInvItem == heldObject)
 			{
+				console.log("Aha!");
 				// USE ANIMATION FOR PLAYER OBJECT?
+				// Solve this object
 				this.solved = true;
-				// Again, should cover it, but other code might be necessary
+				// If the inventory item is one-use, delete it
+				if(heldObject.destroyOnUse) heldObject.deleteMe();
 			}
 			// The player is NOT using the correct inventory item on this object
 			else
