@@ -17,7 +17,7 @@
 	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
-	
+	mouseOnObj: false,
 	canvas: undefined,
 	ctx: undefined,
 	drawLib: undefined,
@@ -61,9 +61,8 @@
 		this.canvas.addEventListener("mouseup", function(e) 
 		{
 			var mouse = self.getMouse(e);
-			if( self.checkWalkPos( mouse.x, mouse.y ) )
+			if( self.checkWalkPos( mouse.x, mouse.y ) && !self.mouseOnObj )
 				self.player.setTarget(mouse.x, mouse.y);
-			
 			// if an object is selected, call its click function
 			// Environment object - later, need to set up code to determine if it's being clicked
 			// with an object in hand
@@ -259,7 +258,7 @@
 			this.ctx.fillText( "Click This", this.mouse.x, this.mouse.y );
 		}
 		
-		
+		this.mouseOnObj = objectIsSelected;
 		return objectIsSelected;
 	}
  };
