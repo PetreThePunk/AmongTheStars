@@ -25,7 +25,7 @@
 	spriteImage: undefined,
 	soundtrack: undefined,
 	rightBoundry: 640,
-	lefBoundry: 0,
+	leftBoundry: 0,
 	topBoundry: 240,
 	bottomBoundry: 480,
 	environmentObjs: [],
@@ -80,6 +80,14 @@
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
+			
+			if(self.map.checkExits( mouse, self.player) ){
+				var newBounds = self.map.rooms[self.map.currentRoom].bounds;
+				self.rightBoundry = newBounds.right;
+				self.leftBoundry = newBounds.left;
+				self.topBoundry = newBounds.top;
+				self.bottomBoundry = newBounds.bottom;
+			}
 		});
 		
 		this.canvas.addEventListener("mousemove", function(e) 
@@ -130,10 +138,8 @@
 		this.ctx.fillStyle = "#888";
 		this.ctx.fillRect(0,this.HEIGHT/2, this.WIDTH, this.HEIGHT/2);
 		
-		this.map.draw( this.ctx, this.mouse );
+		this.map.draw( this.ctx, this.mouse, this.player );
 		
-		// Player
-		this.player.draw(this.ctx);
 		
 		// Inventory
 		this.ctx.save();

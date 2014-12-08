@@ -90,15 +90,18 @@
 		var self = this;
 		thisRoom.exits.forEach( function(exit) {
 			if( player.inRange( exit.x, exit.y) && 
-				checkMouseHover( exit.x, exit.y, 20, mouse) ){
+				self.checkMouseHover( exit.x, exit.y, 20, mouse) ){
 					self.changeRoom( player, exit.room );
+					return true;
 			}
 		});
+		
+		return false;
 	},
 	
 	changeRoom: function( player, roomNum ) {
 		console.log('ChangeRoom!');
-		currentRoom = roomNum;
+		this.currentRoom = roomNum;
 		//player.x = 
 		//player.y = 
 	}
