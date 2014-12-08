@@ -71,7 +71,7 @@
 	inRange: function( x, y ) {
 		var distSq = ( x - this.x ) * ( x - this.x ) +
 						( y - this.y ) * ( y - this.y );
-		return ( distSq < 400 );
+		return ( distSq < 1000 );
 	}
 	
  };

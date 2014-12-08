@@ -26,17 +26,26 @@
 						[{ x: 10, y: 300, room: 0}] );
 	},
 	
-	draw: function( ctx, mouse ) {
+	draw: function( ctx, mouse, player ) {
 		var self = this;
-		this.rooms[this.currentRoom].draw( ctx );
-		this.rooms[this.currentRoom].exits.forEach( function( exit ) {
-			self.drawExitButton( ctx, exit.x, exit.y, mouse, self.rooms[self.currentRoom].name); 
+		var thisRoom = this.rooms[this.currentRoom];
+		thisRoom.draw( ctx );
+		thisRoom.exits.forEach( function( exit ) {
+			self.drawExitButton( ctx, exit.x, exit.y, mouse, thisRoom.name, player); 
 		});
 		
 	},
-	
-	drawExitButton: function( ctx, x, y, mouse, name ) {
-		ctx.fillStyle = "#a00";
+	/**Draws an exit param
+	 */
+	drawExitButton: function( ctx, x, y, mouse, name, player ) {
+		var colorString = "#a00";
+		
+		if( player.inRange( x, y ) )
+			colorString = "#0a0";
+		
+		ctx.fillStyle = colorString;
+		ctx.strokeStyle = colorString;
+		
 		
 		if( this.checkMouseHover( x, y, 20, mouse ) ) {
 			ctx.beginPath();
@@ -44,8 +53,6 @@
 			ctx.fill();
 			ctx.closePath();
 		}
-		
-		ctx.strokeStyle = "#a00";
 		
 		ctx.lineWidth = 2;
 		ctx.beginPath();
@@ -55,8 +62,17 @@
 	},
 	
 	checkMouseHover: function( x, y, radius, mouse ) {
-		var distSq = ( x - mouse.x ) * ( x - mouse.x ) + ( y - mouse.y ) * ( y - mouse.y );
+		var distSq = ( x - mouse.x ) * ( x - mouse.x ) +
+					 ( y - mouse.y ) * ( y - mouse.y );
 		return ( distSq < ( radius * radius ) );
+	},
+	
+	checkExits: function( mouse, player ) {
+		
+	},
+	
+	changeRoom: function( player ) {
+	
 	}
 	
  };

@@ -94,7 +94,7 @@
 		this.ctx.fillStyle = "#888";
 		this.ctx.fillRect(0,this.HEIGHT/2, this.WIDTH, this.HEIGHT/2);
 		
-		this.map.draw( this.ctx, this.mouse );
+		this.map.draw( this.ctx, this.mouse, this.player );
 		
 		this.player.draw(this.ctx);
 		
