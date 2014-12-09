@@ -47,7 +47,7 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(550, 350, "Key", "no graphics rn", "Docking Bay", true, 0);
+		var testInvObject = new game.InventoryObject(550, 350, "Key", "no graphics rn", "Doors", true, 0);
 		this.inventoryObjs.push(testInvObject);
 
 		var testInvObject2 = new game.InventoryObject(350, 250, "Wrench", "no graphics rn", "Docking Bay", true, 1);
