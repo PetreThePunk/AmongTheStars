@@ -47,14 +47,20 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(350, 250, "test invobj", "no graphics rn", "Docking Bay", true);
+		var testInvObject = new game.InventoryObject(550, 350, "Key", "no graphics rn", "Docking Bay", true, 0);
 		this.inventoryObjs.push(testInvObject);
+
+		var testInvObject2 = new game.InventoryObject(350, 250, "Wrench", "no graphics rn", "Docking Bay", true, 1);
+		this.inventoryObjs.push(testInvObject2);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "test enobj", "no graphics rn", "Airlock", 1, testInvObject);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Airlock", 1, testInvObject2);
 		this.environmentObjs.push(testEnviroObject);
 		
-		var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
-		this.environmentObjs.push(testControlPanel);
+		var testEnviroObject2 = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", "Docking Bay", 1, testInvObject);
+		this.environmentObjs.push(testEnviroObject2);
+		
+		//var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
+		//this.environmentObjs.push(testControlPanel);
 
 		//Set up mouse click - move this when items are added(?)
 		var self = this;
@@ -68,17 +74,27 @@
 			// with an object in hand
 			if(self.selectedObject && self.selectedObject instanceof game.EnvironmentObject)
 			{
-				// later we'll need either a for loop, or a player variable that references a held item
-				// for now we only have one inventory object, so...
-				if(self.inventoryObjs[0].isHeld) self.selectedObject.click(self.inventoryObjs[0], self.player);
+				var heldItem=-1;
+				for(var i=0;i<self.inventoryObjs.length;i++)
+					if(self.inventoryObjs[i].isHeld) heldItem = i;
+
+				if(heldItem>=0) self.selectedObject.click(self.inventoryObjs[heldItem], self.player);
 				else self.selectedObject.click(false, self.player);
+				
+				//see if object was solved, actions to take
+				//remove locked door when solved
+				if(self.selectedObject.solved && self.selectedObject.name == "Locked Door")
+					{self.selectedObject.deleteMe();}
+				//rename broken panel when solved
+				if(self.selectedObject.solved && self.selectedObject.name == "Broken Panel")
+					{self.selectedObject.name="Panel Broken Beyond All Repair :C";}
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
 			// Inventory object
 			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
 			{
-				self.selectedObject.click(self.player, self.WIDTH / 6, 7 * self.HEIGHT / 8);
+				self.selectedObject.click(self.player, self.WIDTH / 6 + 100 * self.selectedObject.id, 7 * self.HEIGHT / 8);
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
@@ -158,11 +174,12 @@
 		this.ctx.restore();
 		
 		// Interactable objects
-		var objectIsSelected; // used for determining which object is actually selected
+		var objectIsSelected, objectsSelected=0; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
 		{
 			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory)
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
+			if(objectIsSelected) objectsSelected++;
 		}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
@@ -170,10 +187,11 @@
 		{
 			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location)
 				objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);
+			if(objectIsSelected) objectsSelected++;
 		}
 		
 		// if objectIsSelected is still false, selectedObject is therefore null!
-		if(!objectIsSelected) this.selectedObject = undefined;
+		if(objectsSelected==0) this.selectedObject = undefined;
 	},
 	/** Handles moving for all moveable objs in the game
 	 *
@@ -255,7 +273,6 @@
 			this.ctx.font = '10px Veranda';
 			this.ctx.fillStyle = "#fff";
 			this.ctx.fillText( obj.name, this.mouse.x, this.mouse.y );
-			//console.log(obj.name);
 		}
 		
 		this.mouseOnObj = objectIsSelected;

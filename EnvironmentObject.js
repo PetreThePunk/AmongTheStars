@@ -71,6 +71,19 @@ game.EnvironmentObject = function() {
 				// display or play an "I can't use this" or "examine" message
 			}
 		};
+
+		// Deletes this object (when a consumable is successfully used)
+		// NEEDS TO BE SPLICED FROM THE ASSOCIATED ARRAY
+		p.deleteMe = function()
+		{ 
+			console.log("Delete");
+			// remove it from the array
+			var arrayLoc = game.SadSpace.environmentObjs.indexOf(this);
+			console.log(arrayLoc);
+			game.SadSpace.environmentObjs.splice(arrayLoc, 1);
+			// delete the object itself
+			delete this; 
+		};
 		
 		return EnvironmentObject;
 }();

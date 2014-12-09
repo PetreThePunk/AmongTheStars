@@ -5,11 +5,11 @@ game.InventoryObject = function() {
 	
 		
 		// Constructor
-		function InventoryObject(setX, setY, setName, setGraphic, initialRoom, isoneuse)
+		function InventoryObject(setX, setY, setName, setGraphic, initialRoom, isoneuse, idNumber)
 		{
 			this.name = setName;
 			this.graphicSrc = setGraphic;
-
+			this.id = idNumber;
 			this.location = initialRoom;
 			this.x = setX; this.y = setY;
 			this.isHeld = false; // defaults to outside of inventory
@@ -45,6 +45,7 @@ game.InventoryObject = function() {
 		select it. */
 		p.click = function(player, inventorySlotX, inventorySlotY)
 		{
+			console.log(this.inInventory);
 			if(this.inInventory == false)
 			{
 				// PICKUP ANIMATION FOR PLAYER OBJECT?

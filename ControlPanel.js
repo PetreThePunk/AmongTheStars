@@ -57,6 +57,6 @@ game.ControlPanel = function() {
 			}
 			return false;
 		};
-		
+
 		return ControlPanel;
 }();
