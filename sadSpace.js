@@ -67,13 +67,13 @@
 		this.environmentObjs.push(helpfulVent);
 		
 		// Unlocking the airlock/engine room? door
-		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
-			"Docking Bay", airlockKey, true);
-		this.environmentObjs.push(doorToAirlock);
 		
 		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 1);
 		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
 			"Bedroom", airlockKey, false);
+		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
+			"Docking Bay", airlockKey, true);
+		this.environmentObjs.push(doorToAirlock);
 		this.environmentObjs.push(bedroomCabniet);
 		
 		// Retrieving the emergency fuel reserves
@@ -106,6 +106,12 @@
 				{
 					self.selectedObject.deleteMe();
 					self.map.rooms[5].exits[1].x = 530;
+				}
+				//when airlock door is unlocked, make door
+				else if(self.selectedObject.solved && self.selectedObject.name == "Locked Door")
+				{
+					self.selectedObject.deleteMe();
+					self.map.rooms[0].exits[0].x = 10;
 				}
 				// reset selectedObject
 				self.selectedObject = undefined;
