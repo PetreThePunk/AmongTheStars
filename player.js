@@ -59,8 +59,8 @@
 			ctx.save();
 			var drawImage = this.image;
 			
-			var frameW = this.sizeX * (.1 + this.y/240);
-			var frameH = this.sizeY * (.1 + this.y/240);
+			var frameW = this.sizeX * (.7 + this.y/440);
+			var frameH = this.sizeY * (.7 + this.y/440);
 			
 			if( this.direction == -1)
 				drawImage = this.image2;
@@ -84,8 +84,8 @@
 			if( this.direction == -1)
 				drawImage = this.image2;
 		
-			var frameW = this.sizeX * (.1 + this.y/240);
-			var frameH = this.sizeY * (.1 + this.y/240);
+			var frameW = this.sizeX * (.7 + this.y/440);
+			var frameH = this.sizeY * (.7 + this.y/440);
 			ctx.drawImage(drawImage, 0, 0, 150, 250, 
 				this.x - frameW/2, this.y - frameH, frameW, frameH);
 			this.walkFrame = 0;
