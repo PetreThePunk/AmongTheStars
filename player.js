@@ -14,7 +14,7 @@
 	moving: false,
 	radius: 15,
 	slashRange: 50,
-	speed: 1,
+	speed: 10,
 	sizeX: 75,
 	sizeY: 125,
 	root2: 0.0,

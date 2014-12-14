@@ -68,7 +68,7 @@
 	 */
 	drawExitButton: function( ctx, x, y, mouse, name, player ) {
 		var colorString = "#a00";
-		//If player can exit change indiactor color
+		//If player can exit change indicator color
 		if( player.inRange( x, y ) )
 			colorString = "#0a0";
 		
