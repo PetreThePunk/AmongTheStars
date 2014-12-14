@@ -249,16 +249,13 @@
 				requestAnimationFrame( this.update.bind( this ) );
 				
 				this.moveSprites();
-				
 				this.drawSprites();
-				
 				break;
 				
 			case "loseScreen" :
 				requestAnimationFrame( this.update.bind( this ) );
 				
 				this.drawLoseScreen(this.theEnd);
-				
 				break;
 		}
 	},
@@ -274,7 +271,6 @@
 		
 		this.map.draw( this.ctx, this.mouse, this.player );
 		
-		
 		// Inventory
 		this.ctx.save();
 		this.ctx.fillStyle = "#555";
@@ -288,7 +284,8 @@
 		{
 			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory)
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
-			if(objectIsSelected) objectsSelected++;
+			if(objectIsSelected) 
+				objectsSelected++;
 		}
 		// Resolve environment objects SECOND so they can be selected while holding something
 		// (unless a better way comes up)
@@ -296,11 +293,13 @@
 		{
 			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location)
 				objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);
-			if(objectIsSelected) objectsSelected++;
+			if(objectIsSelected) 
+				objectsSelected++;
 		}
 		
 		// if objectIsSelected is still false, selectedObject is therefore null!
-		if(objectsSelected==0) this.selectedObject = undefined;
+		if(objectsSelected==0) 
+			this.selectedObject = undefined;
 	},
 	/** Handles moving for all moveable objs in the game
 	 *
@@ -393,6 +392,7 @@
 		this.ctx.fillStyle = "#000";
 		this.ctx.fillRect(0,0, this.WIDTH, this.HEIGHT);
 
+		//font
 		this.ctx.font = '12px Courier';
 		this.ctx.textAlign = 'center';
 		this.ctx.fillStyle = "#0f0";
@@ -400,7 +400,7 @@
 		//text wrap
 		var words = this.endings[ending].split(' ');
         var line = '';
-		var x=this.WIDTH/2, y = this.HEIGHT/2;
+		var x=this.WIDTH/2, y = 12;
         for(var n = 0; n < words.length; n++) {
 			if(words[n] == "BREAK"){
 				this.ctx.fillText(line, x, y);
@@ -416,13 +416,10 @@
 					line = words[n] + ' ';
 					y += 12;
 				}
-				else {
+				else
 					line = testLine;
-				}
 			}
         }
         this.ctx.fillText(line, x, y);
-		
-		//this.ctx.fillText( this.endings[ending], this.WIDTH/2, this.HEIGHT/2 );
 	}
  };
