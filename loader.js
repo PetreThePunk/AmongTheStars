@@ -25,7 +25,18 @@ game.IMAGES = {
 	bedroom: "assets/docking-bay.png",
 	laboratory: "assets/docking-bay.png",
 	playerSprites: "assets/walk-cycle.png",
-	playerSpritesInverse: "assets/walk-cycle-flipped.png"
+	playerSpritesInverse: "assets/walk-cycle-flipped.png",
+	ductTape: "assets/duct-tape.png",
+	fuel: "assets/fuel.png",
+	fuelTank: "assets/fuelTank.png",
+	key: "assets/key.png",
+	pipeBusted: "assets/pipe-busted.png",
+	pipeFixed: "assets/pipe-fixed.png",
+	probes: "assets/probes.png",
+	probe: "assets/probes-single.png",
+	spaceSuit: "assets/spacesuit.png",
+	valve: "assets/valve.png",
+	wrench: "assets/wrench.png"
 };
 
 game.keydown = [];
@@ -54,7 +65,19 @@ window.onload = function() {
 		{id: "bedroom", src: "assets/docking-bay"},
 		{id: "laboratory", src: "assets/docking-bay"},
 		{id: "playerSprites", src: "assets/walk-cycle"},
-		{id: "playerSpritesInverse", src: "assets/walk-cycle-flipped"}
+		{id: "playerSpritesInverse", src: "assets/walk-cycle-flipped"},
+		{id: "ductTape", src: "assets/duct-tape"},
+		{id: "fuel", src: "assets/fuel"},
+		{id: "fuelTank", src: "assets/fuelTank"},
+		{id: "key", src: "assets/key"},
+		{id: "pipeBusted", src: "assets/pipe-busted"},
+		{id: "pipeFixed", src: "assets/pipe-fixed"},
+		{id: "probes", src: "assets/probes"},
+		{id: "probe", src: "assets/probes-single"},
+		{id: "spaceSuit", src: "assets/spacesuit"},
+		{id: "valve", src: "assets/valve"},
+		{id: "wrench", src: "assets/wrench"}
+		
 	]);
 	
 }
