@@ -16,6 +16,16 @@ game.KEYBOARD = {
 	"KEY_SPACE": 32
 };
 
+game.IMAGES = {
+	dockingBay: "assets/docking-bay.jpg",
+	airLock: "assets/docking-bay.jpg",
+	storage: "assets/docking-bay.jpg",
+	hallway: "assets/docking-bay.jpg",
+	controlRoom: "assets/docking-bay.jpg",
+	bedroom: "assets/docking-bay.jpg",
+	laboratory: "assets/docking-bay.jpg"
+};
+
 game.keydown = [];
 
 window.onload = function() {
@@ -27,6 +37,15 @@ window.onload = function() {
 	
 	//INIT SADSPACE
 	game.SadSpace.init();
-
+	//Get that asset loading going on
+	game.queue.loadManifest([
+		{id: "dockingBay", src: "assets/docking-bay"},
+		{id: "airLock", src: "assets/docking-bay"},
+		{id: "storage", src: "assets/docking-bay"},
+		{id: "hallway", src: "assets/docking-bay"},
+		{id: "controlRoom", src: "assets/docking-bay"},
+		{id: "bedroom", src: "assets/docking-bay"},
+		{id: "laboratory", src: "assets/docking-bay"}
+	]);
 	
 }
