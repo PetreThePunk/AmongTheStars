@@ -67,7 +67,7 @@
 		this.canvas.addEventListener("mouseup", function(e) 
 		{
 			var mouse = self.getMouse(e);
-			if( self.checkWalkPos( mouse.x, mouse.y ) && !self.mouseOnObj )
+			if( self.checkWalkPos( mouse.x, mouse.y ) && (!self.mouseOnObj || (self.selectedObject && self.selectedObject instanceof game.InventoryObject)))
 				self.player.setTarget(mouse.x, mouse.y);
 			// if an object is selected, call its click function
 			// Environment object - later, need to set up code to determine if it's being clicked
@@ -84,7 +84,10 @@
 				//see if object was solved, actions to take
 				//remove locked door when solved
 				if(self.selectedObject.solved && self.selectedObject.name == "Locked Door")
-					{self.selectedObject.deleteMe();}
+				{
+					self.selectedObject.deleteMe();
+					self.map.rooms[0].exits[0].x = 10;
+				}
 				//rename broken panel when solved
 				if(self.selectedObject.solved && self.selectedObject.name == "Broken Panel")
 					{self.selectedObject.name="Panel Broken Beyond All Repair :C";}
@@ -94,7 +97,8 @@
 			// Inventory object
 			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
 			{
-				self.selectedObject.click(self.player, self.WIDTH / 6 + 100 * self.selectedObject.id, 7 * self.HEIGHT / 8);
+				if(self.player.inRange (self.selectedObject.x, self.selectedObject.y))
+					self.selectedObject.click(self.player, self.WIDTH / 6 + 100 * self.selectedObject.id, 7 * self.HEIGHT / 8);
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
