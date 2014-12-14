@@ -45,7 +45,6 @@
 	 *
 	 */
 	init: function( ) {
-		console.log("GAME!");
 		// declaring properties
 		this.canvas = document.querySelector( 'canvas' );
 		this.canvas.width = this.WIDTH;
@@ -162,7 +161,6 @@
 					else if(self.environmentObjs[i].name=="Ruptured Pipeline")
 						pipeSolved = true;
 				}
-				console.log(fuelSolved , valveSolved , pipeSolved);
 				if(fuelSolved && valveSolved && pipeSolved)
 				{
 					self.gameState = "loseScreen";
@@ -235,7 +233,6 @@
 	 *
 	 */
 	update: function() {
-	//console.log('u');
 		switch( this.gameState ) {
 			case "menuScreen" : 
 				requestAnimationFrame( this.update.bind( this ) );

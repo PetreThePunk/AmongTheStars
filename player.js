@@ -27,7 +27,6 @@
 	//Initialize function for the start of the game
 	init: function() {
 		this.root2 = Math.sqrt( 2.0 ) / 2;
-		console.log("PLAYER!");
 		this.image = new Image();
 		this.image.src = game.IMAGES["playerSprites"];
 		

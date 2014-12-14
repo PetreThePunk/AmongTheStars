@@ -82,10 +82,8 @@ game.EnvironmentObject = function() {
 		// NEEDS TO BE SPLICED FROM THE ASSOCIATED ARRAY
 		p.deleteMe = function()
 		{ 
-			console.log("Delete");
 			// remove it from the array
 			var arrayLoc = game.SadSpace.environmentObjs.indexOf(this);
-			console.log(arrayLoc);
 			game.SadSpace.environmentObjs.splice(arrayLoc, 1);
 			// delete the object itself
 			delete this; 

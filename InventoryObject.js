@@ -54,7 +54,6 @@ game.InventoryObject = function() {
 		select it. */
 		p.click = function(player, inventorySlotX, inventorySlotY)
 		{
-			console.log(this.inInventory);
 			if(this.inInventory == false)
 			{
 				// PICKUP ANIMATION FOR PLAYER OBJECT?

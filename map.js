@@ -28,7 +28,7 @@
 		
 		this.rooms[3] = new game.Room("Bedroom", "bedroom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 320, y: 350, room: 2}] );
+						[{ x: 630, y: 350, room: 2}] );
 						
 		this.rooms[4] = new game.Room("Control Room", "controlRoom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 

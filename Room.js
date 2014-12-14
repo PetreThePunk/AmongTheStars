@@ -17,7 +17,7 @@ game.Room = function() {
 		p.draw = function(ctx)
 		{
 			console.log(this.graphicSrc);
-			ctx.drawImage(this.graphicSrc,0,0, 640, 480);
+			ctx.drawImage(this.graphicSrc,0,0, 640, 360);
 		};
 		
 		return Room;
