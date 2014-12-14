@@ -8,7 +8,7 @@ game.Room = function() {
 		{
 			this.name = setName;
 			this.graphicSrc = new Image();
-			this.graphicSrc.src = game.IMAGES["bedroom"];
+			this.graphicSrc.src = game.IMAGES[setGraphic];
 			this.bounds = bounds;
 			this.exits = exits;
 		}

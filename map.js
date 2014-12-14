@@ -13,35 +13,35 @@
 	//Initialize function for the start of the game
 	init: function() {
 		console.log("MAP!");
-		this.rooms[0] = new game.Room("Docking Bay", "nada",
+		this.rooms[0] = new game.Room("Docking Bay", "dockingBay",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: -100, y: 300, room: 1}, { x: 320, y: 250, room: 2}] );
 						
-		this.rooms[1] = new game.Room("Airlock", "nada", 
+		this.rooms[1] = new game.Room("Airlock", "airLock", 
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 630, y: 300, room: 0},{ x: 10, y: 300, room: 7},] );
 						
-		this.rooms[2] = new game.Room("Hallway Alpha", "nada",
+		this.rooms[2] = new game.Room("Hallway Alpha", "hallway",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 320, y: 350, room: 0}, { x: 320, y: 250, room: 3},
 						{ x: 10, y:300, room: 4}, { x: 630, y:300, room: 5}] );
 		
-		this.rooms[3] = new game.Room("Bedroom", "nada",
+		this.rooms[3] = new game.Room("Bedroom", "bedroom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 320, y: 350, room: 2}] );
 						
-		this.rooms[4] = new game.Room("Control Room", "nada",
+		this.rooms[4] = new game.Room("Control Room", "controlRoom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 630, y: 300, room: 2}] );
 						
-		this.rooms[5] = new game.Room("Laboratory", "nada",
+		this.rooms[5] = new game.Room("Laboratory", "laboratory",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 10, y: 300, room: 2}, { x: -630, y: 250, room: 6}] );
 						
-		this.rooms[6] = new game.Room("Storage", "nada",
+		this.rooms[6] = new game.Room("Storage", "storage",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 10, y: 300, room: 5}]);
-		this.rooms[7] = new game.Room("Space", "nada",
+		this.rooms[7] = new game.Room("Space", "bedroom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[]);
 	},
