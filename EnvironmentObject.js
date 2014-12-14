@@ -4,7 +4,8 @@ var game = game || {};
 game.EnvironmentObject = function() {
 
 		// Constructors - one with a related inventory item, one without
-		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation, clicksToSolve, setObjectSolution)
+		function EnvironmentObject(setX, setY, setName, setGraphic, setLocation,
+			setAssociatedObject, setIsPuzzle)
 		{
 			this.name = setName;
 			this.graphicSrc = setGraphic;
@@ -13,11 +14,10 @@ game.EnvironmentObject = function() {
 			this.location = setLocation;
 			this.x = setX; this.y = setY;
 			
-			this.solveThreshold = clicksToSolve;
-			this.relatedInvItem = setObjectSolution;
-			this.currentSolveClicks = 0;
+			this.relatedInvItem = setAssociatedObject;
 			this.solved = false;
 			
+			this.isPuzzle = setIsPuzzle;
 		};
 		
 		var p = EnvironmentObject.prototype;
@@ -37,6 +37,19 @@ game.EnvironmentObject = function() {
 			if(this.solved)
 			{
 				// display or play an "I don't need to do that" message
+				console.log("uh");
+			}
+			// Object is a container or somesuch rather than an inventory puzzle
+			else if(this.isPuzzle == false)
+			{
+				// add an item to the player's inventory
+				if(this.relatedInvItem != "none")
+				{
+					game.SadSpace.inventoryObjs.push(this.relatedInvItem);
+					this.relatedInvItem.inInventory = true;
+				}
+				// now the thing is empty!
+				this.solved = true;
 			}
 			// An item is needed AND The player is using the correct inventory item on this object
 			else if(this.relatedInvItem != false && this.relatedInvItem == heldObject)
@@ -47,23 +60,6 @@ game.EnvironmentObject = function() {
 				this.solved = true;
 				// If the inventory item is one-use, delete it
 				if(heldObject.destroyOnUse) heldObject.deleteMe();
-			}
-			//An item is NOT needed and the player has clicked on it
-			else if(!this.relatedInvItem)
-			{
-				this.currentSolveClicks++;
-				//check clicks to solve vs current clicks
-				if(this.currentSolveClicks<this.solveThreshold)
-				{
-					console.log("Need more clicks!");
-					//more clicks are needed!
-				}
-				else
-				{
-					console.log("Solved by clicks!");
-					//we have the right number of clicks!
-					this.solved = true;
-				}
 			}
 			// The player is NOT using the correct inventory item on this object
 			else

@@ -56,8 +56,14 @@
 		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Hallway Alpha", 1, testInvObject2);
 		this.environmentObjs.push(testEnviroObject);
 		
-		var testEnviroObject2 = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", "Docking Bay", 1, testInvObject);
-		this.environmentObjs.push(testEnviroObject2);
+		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
+			"Docking Bay", airlockKey, true);
+		this.environmentObjs.push(doorToAirlock);
+		
+		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 0);
+		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
+			"Bedroom", airlockKey, false);
+		this.environmentObjs.push(bedroomCabniet);
 		
 		//var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
 		//this.environmentObjs.push(testControlPanel);
