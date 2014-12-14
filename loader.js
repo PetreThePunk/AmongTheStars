@@ -38,6 +38,11 @@ window.onload = function() {
 	//INIT SADSPACE
 	game.SadSpace.init();
 	//Get that asset loading going on
+	game.queue = new createjs.LoadQueue( false );
+	game.queue.installPlugin( createjs.Sound );
+	game.queue.on( "complete", function() {
+
+	});
 	game.queue.loadManifest([
 		{id: "dockingBay", src: "assets/docking-bay"},
 		{id: "airLock", src: "assets/docking-bay"},
