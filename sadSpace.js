@@ -47,13 +47,13 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(550, 350, "Key", "no graphics rn", "Doors", true, 0);
+		var testInvObject = new game.InventoryObject(250, 250, "Space Suit", "no graphics rn", "Airlock", true, 0);
 		this.inventoryObjs.push(testInvObject);
 
 		var testInvObject2 = new game.InventoryObject(350, 250, "Wrench", "no graphics rn", "Docking Bay", true, 1);
 		this.inventoryObjs.push(testInvObject2);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Airlock", 1, testInvObject2);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Hallway Alpha", 1, testInvObject2);
 		this.environmentObjs.push(testEnviroObject);
 		
 		var testEnviroObject2 = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", "Docking Bay", 1, testInvObject);

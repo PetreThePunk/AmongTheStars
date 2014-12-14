@@ -127,6 +127,10 @@
 		console.log('ChangeRoom!');
 		this.currentRoom = roomNum;
 		player.x = 640 - player.x;
+		if(player.y>300)
+			player.y -= (player.y - 300)*2;
+		else
+			player.y += (300 - player.y)*2;
 		player.target.x = player.x;
 		player.target.y = player.y;
 	}
