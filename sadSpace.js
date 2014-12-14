@@ -382,10 +382,10 @@
 			this.selectedObject = obj; // object will be referenced on click
 			objectIsSelected = true;
 			
-			this.ctx.font = '12px Veranda';
+			this.ctx.font = '14px Veranda';
 			this.ctx.textAlign = 'center';
 			this.ctx.fillStyle = "#fff";
-			this.ctx.fillText( obj.name, this.mouse.x, this.mouse.y );
+			this.ctx.fillText( obj.name, this.WIDTH/2, 375 );
 		}
 		
 		this.mouseOnObj = objectIsSelected;

@@ -93,7 +93,7 @@
 			ctx.font = "12px Veranda";
 			ctx.textAlign = "center";
 			ctx.fillStyle = "#fff";
-			ctx.fillText( name, player.x, player.y + 15 ) 
+			ctx.fillText( name, 640/2, 375 ) 
 		}
 		
 		
