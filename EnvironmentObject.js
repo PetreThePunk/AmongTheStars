@@ -37,7 +37,7 @@ game.EnvironmentObject = function() {
 			if(this.solved)
 			{
 				// display or play an "I don't need to do that" message
-				console.log("uh");
+				console.log("I'm done here.");
 			}
 			// Object is a container or somesuch rather than an inventory puzzle
 			else if(this.isPuzzle == false)
@@ -48,6 +48,8 @@ game.EnvironmentObject = function() {
 					game.SadSpace.inventoryObjs.push(this.relatedInvItem);
 					this.relatedInvItem.inInventory = true;
 				}
+				/* else
+				{console.log("beep boop I am computer");} */
 				// now the thing is empty!
 				this.solved = true;
 			}
