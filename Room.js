@@ -2,7 +2,6 @@
 var game = game || {};
 
 game.Room = function() {
-		console.log('h');
 		// Constructor
 		function Room( setName, setGraphic, bounds, exits )
 		{
