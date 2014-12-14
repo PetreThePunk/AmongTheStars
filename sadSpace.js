@@ -99,9 +99,6 @@
 		this.environmentObjs.push(rupturedFuelPipe);
 		this.environmentObjs.push(emptyFuelTank);
 		this.environmentObjs.push(stuckValve);
-		
-		//var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
-		//this.environmentObjs.push(testControlPanel);
 
 		//Set up mouse click - move this when items are added(?)
 		var self = this;
@@ -179,13 +176,6 @@
 				if((self.player.inRange (self.selectedObject.x, self.selectedObject.y)) ||
 					self.selectedObject.inInventory)
 					self.selectedObject.click(self.player, 40 + 50 * self.selectedObject.id, 7 * self.HEIGHT / 8);
-				// reset selectedObject
-				self.selectedObject = undefined;
-			}
-			// Control Panel object
-			if(self.selectedObject && self.selectedObject instanceof game.ControlPanel)
-			{
-				self.selectedObject.click();
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
@@ -352,16 +342,9 @@
 	drawInteractionCircle: function( obj, somethingSelected ) {
 		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
 		var objectIsSelected = somethingSelected; // used to update selection code
-		if(obj instanceof game.ControlPanel)
-		{
-			objectIsSelected = false;
-			obj.draw(this.ctx, this.WIDTH, this.HEIGHT);
-		}
 		var colr = "#00b";
 		if(obj instanceof game.InventoryObject) 
 			colr = "#0bb";
-		else if(obj instanceof game.ControlPanel) 
-			colr = "#0b0";
 
 		this.ctx.fillStyle = colr;
 		
