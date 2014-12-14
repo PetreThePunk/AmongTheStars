@@ -19,6 +19,7 @@
 	sizeY: 125,
 	root2: 0.0,
 	image: undefined,
+	image2: undefined,
 	walkFrame: 0,
 	walkFrameArray: [],
 	frameCount: 0,
@@ -28,6 +29,10 @@
 		console.log("PLAYER!");
 		this.image = new Image();
 		this.image.src = game.IMAGES["playerSprites"];
+		
+		this.image2 = new Image();
+		this.image2.src = game.IMAGES["playerSpritesInverse"];
+		
 		this.walkFrameArray[0] = { x: 450, y: 0 };
 		this.walkFrameArray[1] = { x: 600, y: 0 };
 		this.walkFrameArray[2] = { x: 0, y: 250 };
@@ -50,11 +55,18 @@
 			//DestinationX, DestinationY, FrameW, FrameH)
 		
 		if(this.moving) {
+			ctx.save();
+			var drawImage = this.image;
 			
 			var frameW = this.sizeX * (.1 + this.y/240);
 			var frameH = this.sizeY * (.1 + this.y/240);
-			ctx.drawImage(this.image, this.walkFrameArray[this.walkFrame].x, this.walkFrameArray[this.walkFrame].y, 150, 250, 
+			
+			if(this.x - this.target.x > 0)
+				drawImage = this.image2;
+			
+			ctx.drawImage(drawImage, this.walkFrameArray[this.walkFrame].x, this.walkFrameArray[this.walkFrame].y, 150, 250, 
 				this.x - frameW/2, this.y - frameH, frameW, frameH);
+			ctx.restore();
 			if(this.frameCount > 6 ){
 				this.walkFrame++;
 				this.frameCount = 0;

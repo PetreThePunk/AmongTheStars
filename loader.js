@@ -24,7 +24,8 @@ game.IMAGES = {
 	controlRoom: "assets/docking-bay.png",
 	bedroom: "assets/docking-bay.png",
 	laboratory: "assets/docking-bay.png",
-	playerSprites: "assets/walk-cycle.png"
+	playerSprites: "assets/walk-cycle.png",
+	playerSpritesInverse: "assets/walk-cycle-flipped.png"
 };
 
 game.keydown = [];
@@ -51,7 +52,9 @@ window.onload = function() {
 		{id: "hallway", src: "assets/docking-bay"},
 		{id: "controlRoom", src: "assets/docking-bay"},
 		{id: "bedroom", src: "assets/docking-bay"},
-		{id: "laboratory", src: "assets/docking-bay"}
+		{id: "laboratory", src: "assets/docking-bay"},
+		{id: "playerSprites", src: "assets/walk-cycle"},
+		{id: "playerSpritesInverse", src: "assets/walk-cycle-flipped"}
 	]);
 	
 }
