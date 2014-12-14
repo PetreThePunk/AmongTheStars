@@ -19,7 +19,7 @@
 						
 		this.rooms[1] = new game.Room("Airlock", "nada", 
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 630, y: 300, room: 0}] );
+						[{ x: 630, y: 300, room: 0},{ x: 10, y: 300, room: 7},] );
 						
 		this.rooms[2] = new game.Room("Hallway Alpha", "nada",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
@@ -41,6 +41,9 @@
 		this.rooms[6] = new game.Room("Storage", "nada",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 10, y: 300, room: 5}]);
+		this.rooms[7] = new game.Room("Space", "nada",
+						{ left: 10, right: 630, top: 240, bot: 360 }, 
+						[]);
 	},
 	
 	draw: function( ctx, mouse, player ) {

@@ -48,7 +48,7 @@
 		this.map = this.game.map;
 		
 		// Reusable item - Trusty Wrench
-		var wrench = new game.InventoryObject(this.WIDTH / 6, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "no graphics rn", 
+		var wrench = new game.InventoryObject(40, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "no graphics rn", 
 			"Bedroom", false, 0);
 		wrench.inInventory = true;
 		this.inventoryObjs.push(wrench);
@@ -67,8 +67,9 @@
 		this.environmentObjs.push(helpfulVent);
 		
 		// Unlocking the airlock/engine room? door
-		
 		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 1);
+		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "no graphics rn", "Airlock", true, -2);
+		this.inventoryObjs.push(spaceSuit);
 		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
 			"Bedroom", airlockKey, false);
 		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
@@ -122,7 +123,7 @@
 				// if the player is in range of the object OR it's in the player's inventory already
 				if((self.player.inRange (self.selectedObject.x, self.selectedObject.y)) ||
 					self.selectedObject.inInventory)
-					self.selectedObject.click(self.player, self.WIDTH / 6 + 100 * self.selectedObject.id, 7 * self.HEIGHT / 8);
+					self.selectedObject.click(self.player, 40 + 50 * self.selectedObject.id, 7 * self.HEIGHT / 8);
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
