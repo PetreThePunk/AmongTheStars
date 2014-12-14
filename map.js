@@ -14,7 +14,7 @@
 	init: function() {
 		console.log("MAP!");
 		this.rooms[0] = new game.Room("Docking Bay", "dockingBay",
-						{ left: 10, right: 630, top: 240, bot: 360 }, 
+						{ left: 10, right: 630, top: 170, bot: 360 }, 
 						[{ x: -100, y: 300, room: 1}, { x: 320, y: 250, room: 2}] );
 						
 		this.rooms[1] = new game.Room("Airlock", "airLock", 
@@ -114,16 +114,19 @@
 	
 	checkExits: function( mouse, player ) {
 		var thisRoom = this.rooms[this.currentRoom];
+
 		var self = this;
+		var returnVal = false;
 		thisRoom.exits.forEach( function(exit) {
 			if( player.inRange( exit.x, exit.y) && 
 				self.checkMouseHover( exit.x, exit.y, 20, mouse) ){
 					self.changeRoom( player, exit.room );
-					return true;
+					console.log ("room changed");
+					returnVal = true;
 			}
 		});
 		
-		return false;
+		return returnVal;
 	},
 	
 	changeRoom: function( player, roomNum ) {
