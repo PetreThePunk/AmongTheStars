@@ -17,8 +17,10 @@
 	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
 	theEnd: undefined,
-	//use BREAK to create new line
-	endings: ["As you exit the station the vastness of space is spread out before you. While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds."],
+	//use BREAK to create a new line manually, otherwise new lines are created automatically for ending text
+	//Ending 0: Exit the space station with your space suit
+	//Ending 1: Exit the space station withOUT your space suit
+	endings: ["As you exit the station the vastness of space is spread out before you. The Red Spot of Jupiter is clearly visible below you. BREAK While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds."],
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
 	mouseOnObj: false,
 	canvas: undefined,
@@ -392,7 +394,7 @@
 				var testLine = line + words[n] + ' ';
 				var metrics = this.ctx.measureText(testLine);
 				var testWidth = metrics.width;
-				if (testWidth > this.WIDTH/2 && n > 0) {
+				if (testWidth > this.WIDTH/1.5 && n > 0) {
 					this.ctx.fillText(line, x, y);
 					line = words[n] + ' ';
 					y += 12;
