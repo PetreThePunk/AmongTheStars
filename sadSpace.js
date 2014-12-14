@@ -58,7 +58,7 @@
 			"Control Room", "none", false);
 		this.environmentObjs.push(centralComputer);
 		
-		// Getting into the storage room
+		// Getting into the storage room + retrieving the fuel reserves + tape
 		var unopenableDoor = new game.EnvironmentObject(630, 300, "Locked Door", "no graphics rn", 
 			"Laboratory", "Red Herring", true);
 		var helpfulVent = new game.EnvironmentObject(530, 250, "Vent Cover", "no graphics rn", 
@@ -66,8 +66,15 @@
 		this.environmentObjs.push(unopenableDoor);
 		this.environmentObjs.push(helpfulVent);
 		
+		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "no graphics rn", 
+			"Storage", true, 1);
+		var ductTape = new game.InventoryObject(430, 290, "Duct Tape", "no graphics rn", 
+			"Storage", true, 2);
+		this.inventoryObjs.push(fuelReserves);
+		this.inventoryObjs.push(ductTape);
+		
 		// Unlocking the airlock/engine room? door
-		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 1);
+		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 3);
 		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "no graphics rn", "Airlock", true, -2);
 		this.inventoryObjs.push(spaceSuit);
 		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
@@ -77,7 +84,16 @@
 		this.environmentObjs.push(doorToAirlock);
 		this.environmentObjs.push(bedroomCabniet);
 		
-		// Retrieving the emergency fuel reserves
+		// Fixing the engines - might need to revise this?
+		var rupturedFuelPipe = new game.EnvironmentObject(140, 250, "Ruptured Pipeline", 
+			"no graphics rn", "Airlock", ductTape, true);
+		var emptyFuelTank = new game.EnvironmentObject(120, 250, "Fuel Tank (Empty)", 
+			"no graphics rn", "Airlock", fuelReserves, true);
+		var stuckValve = new game.EnvironmentObject(140, 275, "Fuel Tank (Empty)", 
+			"no graphics rn", "Airlock", wrench, true);
+		this.environmentObjs.push(rupturedFuelPipe);
+		this.environmentObjs.push(emptyFuelTank);
+		this.environmentObjs.push(stuckValve);
 		
 		//var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
 		//this.environmentObjs.push(testControlPanel);
