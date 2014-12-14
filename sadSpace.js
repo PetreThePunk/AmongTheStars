@@ -16,6 +16,8 @@
 	player: undefined,
 	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
+	textToDraw: '',
+	textDisplayTime: 0,
 	theEnd: undefined,
 	//use BREAK to create a new line manually, otherwise new lines are created automatically for ending text
 	//Ending 0: Exit the space station with your space suit
@@ -245,6 +247,7 @@
 				
 				this.moveSprites();
 				this.drawSprites();
+				this.drawText();
 				break;
 				
 			case "loseScreen" :
@@ -365,10 +368,8 @@
 			this.selectedObject = obj; // object will be referenced on click
 			objectIsSelected = true;
 			
-			this.ctx.font = '14px Veranda';
-			this.ctx.textAlign = 'center';
-			this.ctx.fillStyle = "#fff";
-			this.ctx.fillText( obj.name, this.WIDTH/2, 375 );
+			this.textToDraw=obj.name;
+			this.textDisplayTime=1;
 		}
 		
 		this.mouseOnObj = objectIsSelected;
@@ -409,5 +410,17 @@
 			}
         }
         this.ctx.fillText(line, x, y);
+	},
+	
+	drawText: function(){
+		//this.textToDraw
+		this.ctx.font = '14px Veranda';
+		this.ctx.textAlign = 'center';
+		this.ctx.fillStyle = "#fff";
+		this.ctx.fillText( this.textToDraw, this.WIDTH/2, 375 );
+		if(this.textDisplayTime>0)
+			this.textDisplayTime--;
+		else if (this.textToDraw!="")
+			this.textToDraw="";
 	}
  };

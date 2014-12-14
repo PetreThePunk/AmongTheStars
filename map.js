@@ -90,10 +90,8 @@
 			ctx.fill();
 			ctx.closePath();
 			
-			ctx.font = "12px Veranda";
-			ctx.textAlign = "center";
-			ctx.fillStyle = "#fff";
-			ctx.fillText( name, 640/2, 375 ) 
+			game.SadSpace.textToDraw=name;
+			game.SadSpace.textDisplayTime=1;
 		}
 		
 		
