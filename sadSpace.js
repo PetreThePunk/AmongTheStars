@@ -48,7 +48,7 @@
 		this.map = this.game.map;
 		
 		// Reusable item - Trusty Wrench
-		var wrench = new game.InventoryObject(250, 350, "Your Trusty Wrench", "no graphics rn", 
+		var wrench = new game.InventoryObject(this.WIDTH / 6, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "no graphics rn", 
 			"Bedroom", false, 0);
 		wrench.inInventory = true;
 		this.inventoryObjs.push(wrench);
