@@ -16,6 +16,8 @@
 	player: undefined,
 	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
+	theEnd: undefined,
+	endings: ["You're floating in space all alone","You forgot your space suit, you die in seconds."],
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
 	mouseOnObj: false,
 	canvas: undefined,
@@ -46,6 +48,8 @@
 		
 		this.player = this.game.player;
 		this.map = this.game.map;
+		
+		this.theEnd = 0;
 		
 		// Reusable item - Trusty Wrench
 		var wrench = new game.InventoryObject(40, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "no graphics rn", 
@@ -168,6 +172,33 @@
 				self.topBoundry = newBounds.top;
 				self.bottomBoundry = newBounds.bottom;
 			}
+			
+			//see if player is in space and check which ending they should receive
+			if(self.map.currentRoom == 7)
+			{
+				//get spaceSuit
+				var haveSuit = false;
+				for(var i=0;i<self.inventoryObjs.length; i++)
+				{
+					if(self.inventoryObjs[i].name=="Space Suit" && self.inventoryObjs[i].inInventory)
+					{
+						haveSuit=true;
+						break;
+					}
+				}
+				//if player has suit in space have them drift off (ending 0)
+				if(haveSuit)
+				{
+					self.gameState = "loseScreen";
+					self.theEnd = 0;
+				}
+				//if player DOES NOT have suit in space have them die (ending 1)
+				if(!haveSuit)
+				{
+					self.gameState = "loseScreen";
+					self.theEnd = 1;
+				}
+			}
 		});
 		
 		this.canvas.addEventListener("mousemove", function(e) 
@@ -205,6 +236,9 @@
 				
 			case "loseScreen" :
 				requestAnimationFrame( this.update.bind( this ) );
+				
+				this.drawLoseScreen(this.theEnd);
+				
 				break;
 		}
 	},
@@ -332,5 +366,16 @@
 		
 		this.mouseOnObj = objectIsSelected;
 		return objectIsSelected;
+	},
+	
+	drawLoseScreen: function(ending) {
+		//background
+		this.ctx.fillStyle = "#000";
+		this.ctx.fillRect(0,0, this.WIDTH, this.HEIGHT);
+
+		this.ctx.font = '12px Courier';
+		this.ctx.textAlign = 'center';
+		this.ctx.fillStyle = "#0f0";
+		this.ctx.fillText( this.endings[ending], this.WIDTH/2, this.HEIGHT/2 );
 	}
  };
