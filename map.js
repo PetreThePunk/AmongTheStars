@@ -34,7 +34,7 @@
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 630, y: 250, room: 2}] );
 						
-		this.rooms[5] = new game.Room("Laboratory", "laboratory",
+		this.rooms[5] = new game.Room("Observatory", "observatory",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
 						[{ x: 10, y: 250, room: 2}, { x: -630, y: 250, room: 6}] );
 						

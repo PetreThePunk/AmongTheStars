@@ -68,7 +68,7 @@
 		
 		// Getting into the storage room + retrieving the fuel reserves + tape
 		var stuckDoor = new game.EnvironmentObject(630, 250, "Stuck Door", "no graphics rn", 
-			"Laboratory", wrench, true);
+			"Observatory", wrench, true);
 		this.environmentObjs.push(stuckDoor);
 		
 		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "no graphics rn", 
