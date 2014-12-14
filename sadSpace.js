@@ -17,7 +17,8 @@
 	map: undefined,
 	gameState: "gameScreen", // Game, LoseScreen
 	theEnd: undefined,
-	endings: ["You're floating in space all alone","You forgot your space suit, you die in seconds."],
+	//use BREAK to create new line
+	endings: ["As you exit the station the vastness of space is spread out before you. While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds."],
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
 	mouseOnObj: false,
 	canvas: undefined,
@@ -376,6 +377,33 @@
 		this.ctx.font = '12px Courier';
 		this.ctx.textAlign = 'center';
 		this.ctx.fillStyle = "#0f0";
-		this.ctx.fillText( this.endings[ending], this.WIDTH/2, this.HEIGHT/2 );
+		
+		//text wrap
+		var words = this.endings[ending].split(' ');
+        var line = '';
+		var x=this.WIDTH/2, y = this.HEIGHT/2;
+        for(var n = 0; n < words.length; n++) {
+			if(words[n] == "BREAK"){
+				this.ctx.fillText(line, x, y);
+				line = '';
+				y += 12;
+			}
+			else{
+				var testLine = line + words[n] + ' ';
+				var metrics = this.ctx.measureText(testLine);
+				var testWidth = metrics.width;
+				if (testWidth > this.WIDTH/2 && n > 0) {
+					this.ctx.fillText(line, x, y);
+					line = words[n] + ' ';
+					y += 12;
+				}
+				else {
+					line = testLine;
+				}
+			}
+        }
+        this.ctx.fillText(line, x, y);
+		
+		//this.ctx.fillText( this.endings[ending], this.WIDTH/2, this.HEIGHT/2 );
 	}
  };
