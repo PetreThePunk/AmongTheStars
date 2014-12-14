@@ -277,8 +277,11 @@
 		var objectIsSelected, objectsSelected=0; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
 		{
-			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory)
+			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory){
+				
+				this.inventoryObjs[i].draw(this.map.currentRoom, this.mouse.x, this.mouse.y, this.ctx);
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
+			}
 			if(objectIsSelected) 
 				objectsSelected++;
 		}
@@ -286,8 +289,10 @@
 		// (unless a better way comes up)
 		for(var i = 0; i < this.environmentObjs.length; i++)
 		{
-			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location)
+			if(this.map.rooms[this.map.currentRoom].name == this.environmentObjs[i].location){
+				this.environmentObjs[i].draw(this.ctx);
 				objectIsSelected = this.drawInteractionCircle(this.environmentObjs[i], objectIsSelected);
+			}
 			if(objectIsSelected) 
 				objectsSelected++;
 		}
