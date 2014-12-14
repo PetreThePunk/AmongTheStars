@@ -46,7 +46,7 @@ game.EnvironmentObject = function() {
 				if(this.relatedInvItem != "none")
 				{
 					game.SadSpace.inventoryObjs.push(this.relatedInvItem);
-					// this.relatedInvItem.inInventory = true;
+					this.relatedInvItem.inInventory = true;
 				}
 				/* else
 				{console.log("beep boop I am computer");} */
