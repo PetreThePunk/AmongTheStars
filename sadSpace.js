@@ -89,7 +89,7 @@
 			"no graphics rn", "Airlock", ductTape, true);
 		var emptyFuelTank = new game.EnvironmentObject(120, 250, "Fuel Tank (Empty)", 
 			"no graphics rn", "Airlock", fuelReserves, true);
-		var stuckValve = new game.EnvironmentObject(140, 275, "Fuel Tank (Empty)", 
+		var stuckValve = new game.EnvironmentObject(140, 275, "Stuck Valve", 
 			"no graphics rn", "Airlock", wrench, true);
 		this.environmentObjs.push(rupturedFuelPipe);
 		this.environmentObjs.push(emptyFuelTank);
