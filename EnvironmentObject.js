@@ -8,8 +8,12 @@ game.EnvironmentObject = function() {
 			setAssociatedObject, setIsPuzzle)
 		{
 			this.name = setName;
-			this.graphicSrc = setGraphic;
-			this.graphicSrcIndex = 0;
+			if(setGraphic !== "none") {
+				this.graphicSrc = new Image();
+				this.graphicSrc.src = game.IMAGES[setGraphic];
+			} else {
+				this.graphicSrc = setGraphic;
+			}
 			
 			this.location = setLocation;
 			this.x = setX; this.y = setY;
@@ -28,7 +32,12 @@ game.EnvironmentObject = function() {
 		in the MAIN method whether to draw them, rather than making it part of this
 		function. Probably for loop, checking this location against player location. */
 		p.draw = function(ctx)
-		{ ctx.drawImage(this.graphicSrc[graphicSrcIndex], this.posX, this.posY); };
+		{
+			if(this.graphicSrc !== "none") {
+				console.log(this.graphicSrc.width);
+				ctx.drawImage(this.graphicSrc, this.x, this.y);
+			}
+		};
 
 		/* Clicked by player - check if item is needed and if player has right one */
 		p.click = function(heldObject, player)

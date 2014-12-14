@@ -8,7 +8,13 @@ game.InventoryObject = function() {
 		function InventoryObject(setX, setY, setName, setGraphic, initialRoom, isoneuse, idNumber)
 		{
 			this.name = setName;
-			this.graphicSrc = setGraphic;
+			if(setGraphic !== "none") {
+				this.graphicSrc = new Image();
+				this.graphicSrc.src = game.IMAGES[setGraphic];
+			} else {
+				this.graphicSrc = setGraphic;
+			}
+			
 			this.id = idNumber;
 			this.location = initialRoom;
 			this.x = setX; this.y = setY;
@@ -36,7 +42,10 @@ game.InventoryObject = function() {
 			
 			if(this.inInventory || location == playerLocation)
 			{
-				// ctx.drawImage(this.graphicSrc, this.x, this.y);
+				if(this.graphicSrc !== "none") {
+					console.log(this.graphicSrc.width);
+					ctx.drawImage(this.graphicSrc, this.x, this.y);
+				}
 			}
 		};
 
