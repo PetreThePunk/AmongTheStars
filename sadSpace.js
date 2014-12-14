@@ -58,46 +58,46 @@
 		this.theEnd = 0;
 		
 		// Reusable item - Trusty Wrench
-		var wrench = new game.InventoryObject(40, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "no graphics rn", 
+		var wrench = new game.InventoryObject(40, 7 * this.HEIGHT / 8, "Your Trusty Wrench", "wrench", 
 			"Bedroom", false, 0);
 		wrench.inInventory = true;
 		this.inventoryObjs.push(wrench);
 		
 		// Speaking with your AI friend
-		var centralComputer = new game.EnvironmentObject(310, 250, "Central Computer", "no graphics rn", 
+		var centralComputer = new game.EnvironmentObject(310, 250, "Central Computer", "none", 
 			"Control Room", "none", false);
 		this.environmentObjs.push(centralComputer);
 		
 		// Getting into the storage room + retrieving the fuel reserves + tape
-		var stuckDoor = new game.EnvironmentObject(630, 250, "Stuck Door", "no graphics rn", 
+		var stuckDoor = new game.EnvironmentObject(630, 250, "Stuck Door", "none", 
 			"Observatory", wrench, true);
 		this.environmentObjs.push(stuckDoor);
 		
-		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "no graphics rn", 
+		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "fuel", 
 			"Storage", true, 1);
-		var ductTape = new game.InventoryObject(430, 290, "Duct Tape", "no graphics rn", 
+		var ductTape = new game.InventoryObject(430, 290, "Duct Tape", "ductTape", 
 			"Storage", true, 2);
 		this.inventoryObjs.push(fuelReserves);
 		this.inventoryObjs.push(ductTape);
 		
 		// Unlocking the airlock/engine room? door
-		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 3);
-		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "no graphics rn", "Airlock", true, 5);
+		var airlockKey = new game.InventoryObject(400, 250, "Key", "key", "Bedroom", true, 3);
+		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "spacesuit", "Airlock", true, 5);
 		this.inventoryObjs.push(spaceSuit);
-		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
+		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "none", 
 			"Bedroom", airlockKey, false);
-		var doorToAirlock = new game.EnvironmentObject(10, 250, "Locked Door", "no graphics rn", 
+		var doorToAirlock = new game.EnvironmentObject(10, 250, "Locked Door", "none", 
 			"Docking Bay", airlockKey, true);
 		this.environmentObjs.push(doorToAirlock);
 		this.environmentObjs.push(bedroomCabniet);
 		
 		// Fixing the engines - might need to revise this?
 		var rupturedFuelPipe = new game.EnvironmentObject(140, 250, "Ruptured Pipeline", 
-			"no graphics rn", "Docking Bay", ductTape, true);
+			"pipeBusted", "Docking Bay", ductTape, true);
 		var emptyFuelTank = new game.EnvironmentObject(190, 130, "Fuel Tank (Empty)", 
-			"no graphics rn", "Docking Bay", fuelReserves, true);
+			"fuelTank", "Docking Bay", fuelReserves, true);
 		var stuckValve = new game.EnvironmentObject(140, 275, "Stuck Valve", 
-			"no graphics rn", "Docking Bay", wrench, true);
+			"valve", "Docking Bay", wrench, true);
 		this.environmentObjs.push(rupturedFuelPipe);
 		this.environmentObjs.push(emptyFuelTank);
 		this.environmentObjs.push(stuckValve);
