@@ -18,11 +18,11 @@ game.KEYBOARD = {
 
 game.IMAGES = {
 	dockingBay: "assets/docking-bay.png",
-	airLock: "assets/docking-bay.png",
+	airLock: "assets/airlock-no-objects.jpeg",
 	storage: "assets/docking-bay.png",
-	hallway: "assets/docking-bay.png",
-	controlRoom: "assets/docking-bay.png",
-	bedroom: "assets/docking-bay.png",
+	hallway: "assets/hallway.jpeg",
+	controlRoom: "assets/control-room.jpeg",
+	bedroom: "assets/livingquarters.jpeg",
 	observatory: "assets/docking-bay.png",
 	playerSprites: "assets/walk-cycle.png",
 	playerSpritesInverse: "assets/walk-cycle-flipped.png",
@@ -58,11 +58,11 @@ window.onload = function() {
 	});
 	game.queue.loadManifest([
 		{id: "dockingBay", src: "assets/docking-bay"},
-		{id: "airLock", src: "assets/docking-bay"},
+		{id: "airLock", src: "airlock-no-objects"},
 		{id: "storage", src: "assets/docking-bay"},
-		{id: "hallway", src: "assets/docking-bay"},
-		{id: "controlRoom", src: "assets/docking-bay"},
-		{id: "bedroom", src: "assets/docking-bay"},
+		{id: "hallway", src: "assets/hallway"},
+		{id: "controlRoom", src: "assets/control-room"},
+		{id: "bedroom", src: "assets/livingquarters"},
 		{id: "observatory", src: "assets/docking-bay"},
 		{id: "playerSprites", src: "assets/walk-cycle"},
 		{id: "playerSpritesInverse", src: "assets/walk-cycle-flipped"},
