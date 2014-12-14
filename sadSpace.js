@@ -49,7 +49,7 @@
 		
 		// Reusable item - Trusty Wrench
 		var wrench = new game.InventoryObject(250, 350, "Your Trusty Wrench", "no graphics rn", 
-			"Nowhere", true, 0);
+			"Nowhere", false, 0);
 		wrench.inInventory = true;
 		this.inventoryObjs.push(wrench);
 		
@@ -58,12 +58,20 @@
 			"Control Room", "none", false);
 		this.environmentObjs.push(centralComputer);
 		
+		// Getting into the storage room
+		var unopenableDoor = new game.EnvironmentObject(630, 300, "Locked Door", "no graphics rn", 
+			"Laboratory", "Red Herring", true);
+		var helpfulVent = new game.EnvironmentObject(530, 250, "Vent Cover", "no graphics rn", 
+			"Laboratory", wrench, true);
+		this.environmentObjs.push(unopenableDoor);
+		this.environmentObjs.push(helpfulVent);
+		
 		// Unlocking the airlock/engine room? door
 		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
 			"Docking Bay", airlockKey, true);
 		this.environmentObjs.push(doorToAirlock);
 		
-		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 0);
+		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 1);
 		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
 			"Bedroom", airlockKey, false);
 		this.environmentObjs.push(bedroomCabniet);
