@@ -130,6 +130,16 @@
 					self.selectedObject.deleteMe();
 					self.map.rooms[0].exits[0].x = 10;
 				}
+				//when fuel tank is filled, change name
+				else if(self.selectedObject.solved && self.selectedObject.name == "Fuel Tank (Empty)")
+				{
+					self.selectedObject.name = "Fuel Tank";
+				}
+				//when ruptured pipeline is taped, change name
+				else if(self.selectedObject.solved && self.selectedObject.name == "Ruptured Pipeline")
+				{
+					self.selectedObject.name = "Pipeline w/ Duct Tape";
+				}
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
