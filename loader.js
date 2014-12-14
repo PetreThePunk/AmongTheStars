@@ -23,7 +23,8 @@ game.IMAGES = {
 	hallway: "assets/docking-bay.png",
 	controlRoom: "assets/docking-bay.png",
 	bedroom: "assets/docking-bay.png",
-	laboratory: "assets/docking-bay.png"
+	laboratory: "assets/docking-bay.png",
+	playerSprites: "assets/walk-cycle.png"
 };
 
 game.keydown = [];
