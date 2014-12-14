@@ -47,17 +47,21 @@
 		this.player = this.game.player;
 		this.map = this.game.map;
 		
-		var testInvObject = new game.InventoryObject(550, 350, "Key", "no graphics rn", "Doors", true, 0);
-		this.inventoryObjs.push(testInvObject);
-
-		var testInvObject2 = new game.InventoryObject(350, 250, "Wrench", "no graphics rn", "Docking Bay", true, 1);
+		var testInvObject2 = new game.InventoryObject(350, 250, "Wrench", "no graphics rn", "Docking Bay", false, 1);
 		this.inventoryObjs.push(testInvObject2);
 		
-		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Airlock", 1, testInvObject2);
+		var testEnviroObject = new game.EnvironmentObject(250, 250, "Broken Panel", "no graphics rn", "Airlock", 
+			testInvObject2, true);
 		this.environmentObjs.push(testEnviroObject);
 		
-		var testEnviroObject2 = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", "Docking Bay", 1, testInvObject);
-		this.environmentObjs.push(testEnviroObject2);
+		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
+			"Docking Bay", airlockKey, true);
+		this.environmentObjs.push(doorToAirlock);
+		
+		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 0);
+		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
+			"Bedroom", airlockKey, false);
+		this.environmentObjs.push(bedroomCabniet);
 		
 		//var testControlPanel = new game.ControlPanel(450, 250, "test CP", "no graphics rn", "Doors");
 		//this.environmentObjs.push(testControlPanel);
