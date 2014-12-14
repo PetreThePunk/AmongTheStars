@@ -49,7 +49,7 @@
 		
 		// Reusable item - Trusty Wrench
 		var wrench = new game.InventoryObject(250, 350, "Your Trusty Wrench", "no graphics rn", 
-			"Nowhere", false, 0);
+			"Bedroom", false, 0);
 		wrench.inInventory = true;
 		this.inventoryObjs.push(wrench);
 		
@@ -100,16 +100,13 @@
 				if(heldItem>=0) self.selectedObject.click(self.inventoryObjs[heldItem], self.player);
 				else self.selectedObject.click(false, self.player);
 				
-				//see if object was solved, actions to take
-				//remove locked door when solved
-				if(self.selectedObject.solved && self.selectedObject.name == "Locked Door")
+				/* *** OBJECTS SOLVED ACTIONS *** */
+				//when vent cover is opened, make door
+				if(self.selectedObject.solved && self.selectedObject.name == "Vent Cover")
 				{
 					self.selectedObject.deleteMe();
-					self.map.rooms[0].exits[0].x = 10;
+					self.map.rooms[5].exits[1].x = 530;
 				}
-				//rename broken panel when solved
-				if(self.selectedObject.solved && self.selectedObject.name == "Broken Panel")
-					{self.selectedObject.name="Panel Broken Beyond All Repair :C";}
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}

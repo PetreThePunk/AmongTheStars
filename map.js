@@ -9,7 +9,7 @@
  //Player Obj
  game.map = {
 	rooms: [],
-	currentRoom: 0,
+	currentRoom: 3,
 	//Initialize function for the start of the game
 	init: function() {
 		console.log("MAP!");
@@ -36,7 +36,7 @@
 						
 		this.rooms[5] = new game.Room("Laboratory", "nada",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 10, y: 300, room: 2}, { x: 630, y: 300, room: 6}] );
+						[{ x: 10, y: 300, room: 2}, { x: -630, y: 250, room: 6}] );
 						
 		this.rooms[6] = new game.Room("Storage", "nada",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
