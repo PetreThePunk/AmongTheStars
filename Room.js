@@ -7,7 +7,8 @@ game.Room = function() {
 		function Room( setName, setGraphic, bounds, exits )
 		{
 			this.name = setName;
-			this.graphicSrc = setGraphic;
+			this.graphicSrc = new Image();
+			this.graphicSrc.src = game.IMAGES["bedroom"];
 			this.bounds = bounds;
 			this.exits = exits;
 		}
@@ -16,7 +17,7 @@ game.Room = function() {
 		
 		p.draw = function(ctx)
 		{
-			//ctx.drawImage(this.graphicSrc, this.posX, this.posY);
+			ctx.drawImage(this.graphicSrc,0,0, 640, 480);
 		};
 		
 		return Room;

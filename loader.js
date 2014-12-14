@@ -17,13 +17,13 @@ game.KEYBOARD = {
 };
 
 game.IMAGES = {
-	dockingBay: "assets/docking-bay.jpg",
-	airLock: "assets/docking-bay.jpg",
-	storage: "assets/docking-bay.jpg",
-	hallway: "assets/docking-bay.jpg",
-	controlRoom: "assets/docking-bay.jpg",
-	bedroom: "assets/docking-bay.jpg",
-	laboratory: "assets/docking-bay.jpg"
+	dockingBay: "assets/docking-bay.png",
+	airLock: "assets/docking-bay.png",
+	storage: "assets/docking-bay.png",
+	hallway: "assets/docking-bay.png",
+	controlRoom: "assets/docking-bay.png",
+	bedroom: "assets/docking-bay.png",
+	laboratory: "assets/docking-bay.png"
 };
 
 game.keydown = [];
