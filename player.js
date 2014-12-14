@@ -23,6 +23,7 @@
 	walkFrame: 0,
 	walkFrameArray: [],
 	frameCount: 0,
+	direction: 1,
 	//Initialize function for the start of the game
 	init: function() {
 		this.root2 = Math.sqrt( 2.0 ) / 2;
@@ -61,7 +62,7 @@
 			var frameW = this.sizeX * (.1 + this.y/240);
 			var frameH = this.sizeY * (.1 + this.y/240);
 			
-			if(this.x - this.target.x > 0)
+			if( this.direction == -1)
 				drawImage = this.image2;
 			
 			ctx.drawImage(drawImage, this.walkFrameArray[this.walkFrame].x, this.walkFrameArray[this.walkFrame].y, 150, 250, 
@@ -78,9 +79,14 @@
 			if(this.walkFrame > 7)
 				this.walkFrame = 0;
 		} else {
+			var drawImage = this.image;
+		
+			if( this.direction == -1)
+				drawImage = this.image2;
+		
 			var frameW = this.sizeX * (.1 + this.y/240);
 			var frameH = this.sizeY * (.1 + this.y/240);
-			ctx.drawImage(this.image, 0, 0, 150, 250, 
+			ctx.drawImage(drawImage, 0, 0, 150, 250, 
 				this.x - frameW/2, this.y - frameH, frameW, frameH);
 			this.walkFrame = 0;
 		}
@@ -111,6 +117,10 @@
 		this.target.x = x;
 		this.target.y = y;
 		this.moving = true;
+		if( this.x - x > 0)
+			this.direction = -1;
+		else
+			this.direction = 1;
 	},
 	
 	moveToTarget: function() {
