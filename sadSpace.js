@@ -20,7 +20,8 @@
 	//use BREAK to create a new line manually, otherwise new lines are created automatically for ending text
 	//Ending 0: Exit the space station with your space suit
 	//Ending 1: Exit the space station withOUT your space suit
-	endings: ["As you exit the station the vastness of space is spread out before you. The Red Spot of Jupiter is clearly visible below you. BREAK While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds."],
+	//Ending 2: Fix ruptured pipeline and fill up fuel
+	endings: ["As you exit the station the vastness of space is spread out before you. The Red Spot of Jupiter is clearly visible below you. BREAK While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds.","The pressure created by sealing up the broken pipe created a small explosion. Normally this might not be an issue besides singeing your eyebrows and creating a small amount of damage that could easily be fixed. BREAK But of course you filled up a nearby fuel tank with fuel. This created a bigger explosion which may or may not have killed you. BREAK BREAK Spoiler alert: it did."],
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
 	mouseOnObj: false,
 	canvas: undefined,
@@ -141,11 +142,27 @@
 				else if(self.selectedObject.solved && self.selectedObject.name == "Fuel Tank (Empty)")
 				{
 					self.selectedObject.name = "Fuel Tank";
+					for(var i = 0; i < self.environmentObjs.length; i++)
+					{
+						if(self.environmentObjs[i].name == "Pipeline w/ Duct Tape")
+						{
+							self.gameState = "loseScreen";
+							self.theEnd = 2;
+						}
+					}
 				}
 				//when ruptured pipeline is taped, change name
 				else if(self.selectedObject.solved && self.selectedObject.name == "Ruptured Pipeline")
 				{
 					self.selectedObject.name = "Pipeline w/ Duct Tape";
+					for(var i = 0; i < self.environmentObjs.length; i++)
+					{
+						if(self.environmentObjs[i].name == "Fuel Tank")
+						{
+							self.gameState = "loseScreen";
+							self.theEnd = 2;
+						}
+					}
 				}
 				// reset selectedObject
 				self.selectedObject = undefined;

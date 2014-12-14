@@ -14,7 +14,7 @@
 	moving: false,
 	radius: 15,
 	slashRange: 50,
-	speed: 150,
+	speed: 1,
 	sizeX: 75,
 	sizeY: 125,
 	root2: 0.0,
@@ -107,8 +107,8 @@
 		dVec.x = dVec.x/mag;
 		dVec.y = dVec.y/mag;
 		
-		this.x += dVec.x;
-		this.y += dVec.y;
+		this.x += dVec.x*this.speed;
+		this.y += dVec.y*this.speed;
 	},
 	
 	inRange: function( x, y ) {
