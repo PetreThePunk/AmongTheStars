@@ -67,12 +67,9 @@
 		this.environmentObjs.push(centralComputer);
 		
 		// Getting into the storage room + retrieving the fuel reserves + tape
-		var unopenableDoor = new game.EnvironmentObject(630, 300, "Locked Door", "no graphics rn", 
-			"Laboratory", "Red Herring", true);
-		var helpfulVent = new game.EnvironmentObject(530, 250, "Vent Cover", "no graphics rn", 
+		var stuckDoor = new game.EnvironmentObject(630, 250, "Stuck Door", "no graphics rn", 
 			"Laboratory", wrench, true);
-		this.environmentObjs.push(unopenableDoor);
-		this.environmentObjs.push(helpfulVent);
+		this.environmentObjs.push(stuckDoor);
 		
 		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "no graphics rn", 
 			"Storage", true, 1);
@@ -83,22 +80,22 @@
 		
 		// Unlocking the airlock/engine room? door
 		var airlockKey = new game.InventoryObject(400, 250, "Key", "no graphics rn", "Bedroom", true, 3);
-		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "no graphics rn", "Airlock", true, -2);
+		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "no graphics rn", "Airlock", true, 5);
 		this.inventoryObjs.push(spaceSuit);
 		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "no graphics rn", 
 			"Bedroom", airlockKey, false);
-		var doorToAirlock = new game.EnvironmentObject(10, 300, "Locked Door", "no graphics rn", 
+		var doorToAirlock = new game.EnvironmentObject(10, 250, "Locked Door", "no graphics rn", 
 			"Docking Bay", airlockKey, true);
 		this.environmentObjs.push(doorToAirlock);
 		this.environmentObjs.push(bedroomCabniet);
 		
 		// Fixing the engines - might need to revise this?
 		var rupturedFuelPipe = new game.EnvironmentObject(140, 250, "Ruptured Pipeline", 
-			"no graphics rn", "Airlock", ductTape, true);
-		var emptyFuelTank = new game.EnvironmentObject(120, 250, "Fuel Tank (Empty)", 
-			"no graphics rn", "Airlock", fuelReserves, true);
+			"no graphics rn", "Docking Bay", ductTape, true);
+		var emptyFuelTank = new game.EnvironmentObject(190, 130, "Fuel Tank (Empty)", 
+			"no graphics rn", "Docking Bay", fuelReserves, true);
 		var stuckValve = new game.EnvironmentObject(140, 275, "Stuck Valve", 
-			"no graphics rn", "Airlock", wrench, true);
+			"no graphics rn", "Docking Bay", wrench, true);
 		this.environmentObjs.push(rupturedFuelPipe);
 		this.environmentObjs.push(emptyFuelTank);
 		this.environmentObjs.push(stuckValve);
@@ -111,6 +108,7 @@
 		this.canvas.addEventListener("mouseup", function(e) 
 		{
 			var mouse = self.getMouse(e);
+			console.log("Mouse X:", mouse.x, "Y:", mouse.y);
 			if( self.checkWalkPos( mouse.x, mouse.y ) && (!self.mouseOnObj || (self.selectedObject && self.selectedObject instanceof game.InventoryObject)))
 				self.player.setTarget(mouse.x, mouse.y);
 			// if an object is selected, call its click function
@@ -127,10 +125,10 @@
 				
 				/* *** OBJECTS SOLVED ACTIONS *** */
 				//when vent cover is opened, make door
-				if(self.selectedObject.solved && self.selectedObject.name == "Vent Cover")
+				if(self.selectedObject.solved && self.selectedObject.name == "Stuck Door")
 				{
 					self.selectedObject.deleteMe();
-					self.map.rooms[5].exits[1].x = 530;
+					self.map.rooms[5].exits[1].x = 630;
 				}
 				//when airlock door is unlocked, make door
 				else if(self.selectedObject.solved && self.selectedObject.name == "Locked Door")
@@ -142,27 +140,34 @@
 				else if(self.selectedObject.solved && self.selectedObject.name == "Fuel Tank (Empty)")
 				{
 					self.selectedObject.name = "Fuel Tank";
-					for(var i = 0; i < self.environmentObjs.length; i++)
-					{
-						if(self.environmentObjs[i].name == "Pipeline w/ Duct Tape")
-						{
-							self.gameState = "loseScreen";
-							self.theEnd = 2;
-						}
-					}
+				}
+				//when stuck valve is fixed, change name
+				else if(self.selectedObject.solved && self.selectedObject.name == "Stuck Valve")
+				{
+					self.selectedObject.name = "Open Valve";
 				}
 				//when ruptured pipeline is taped, change name
 				else if(self.selectedObject.solved && self.selectedObject.name == "Ruptured Pipeline")
 				{
 					self.selectedObject.name = "Pipeline w/ Duct Tape";
-					for(var i = 0; i < self.environmentObjs.length; i++)
-					{
-						if(self.environmentObjs[i].name == "Fuel Tank")
-						{
-							self.gameState = "loseScreen";
-							self.theEnd = 2;
-						}
-					}
+				}
+				
+				//see if Fuel Tank, Valve, and Pipeline are fixed. if so, call ending 2
+				var fuelSolved=false, valveSolved=false, pipeSolved=false;
+				for(var i=0;i<self.environmentObjs.length;i++)
+				{
+					if(self.environmentObjs[i].name=="Fuel Tank")
+						fuelSolved = true;
+					else if(self.environmentObjs[i].name=="Open Valve")
+						valveSolved = true;
+					else if(self.environmentObjs[i].name=="Ruptured Pipeline")
+						pipeSolved = true;
+				}
+				console.log(fuelSolved , valveSolved , pipeSolved);
+				if(fuelSolved && valveSolved && pipeSolved)
+				{
+					self.gameState = "loseScreen";
+					self.theEnd = 2;
 				}
 				// reset selectedObject
 				self.selectedObject = undefined;
@@ -378,7 +383,8 @@
 			this.selectedObject = obj; // object will be referenced on click
 			objectIsSelected = true;
 			
-			this.ctx.font = '10px Veranda';
+			this.ctx.font = '12px Veranda';
+			this.ctx.textAlign = 'center';
 			this.ctx.fillStyle = "#fff";
 			this.ctx.fillText( obj.name, this.mouse.x, this.mouse.y );
 		}
