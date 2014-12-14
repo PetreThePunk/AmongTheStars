@@ -12,7 +12,6 @@
 	currentRoom: 3,
 	//Initialize function for the start of the game
 	init: function() {
-		console.log("MAP!");
 		this.rooms[0] = new game.Room("Docking Bay", "dockingBay",
 						{ left: 10, right: 630, top: 170, bot: 360 }, 
 						[{ x: -100, y: 250, room: 1}, { x: 630, y: 250, room: 2}] );
@@ -128,7 +127,6 @@
 	},
 	
 	changeRoom: function( player, roomNum ) {
-		console.log('ChangeRoom!');
 		var oldRoom = this.currentRoom;
 		this.currentRoom = roomNum;
 		
