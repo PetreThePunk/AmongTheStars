@@ -76,8 +76,8 @@ window.onload = function() {
 		{id: "probe", src: "assets/probesingle"},
 		{id: "spaceSuit", src: "assets/spacesuit"},
 		{id: "valve", src: "assets/valve"},
-		{id: "wrench", src: "assets/wrench"}
-		
+		{id: "wrench", src: "assets/wrench"},
+		{id: "soundtrack", src: "assets/sadspacebgm/sadspacebgm.mp3"}
 	]);
 	
 }

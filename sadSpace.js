@@ -223,6 +223,8 @@
 			self.mouse = self.getMouse(e);
 		});
 		
+		this.soundtrack = createjs.Sound.play("soundtrack", {loop:4, volume:1.0});
+		
 		this.update();
 	},
 	/** Method that gets called each frame by the browser
