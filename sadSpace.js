@@ -295,6 +295,9 @@
 		// if objectIsSelected is still false, selectedObject is therefore null!
 		if(objectsSelected==0) 
 			this.selectedObject = undefined;
+			
+		
+		this.player.draw( this.ctx );
 	},
 	/** Handles moving for all moveable objs in the game
 	 *
