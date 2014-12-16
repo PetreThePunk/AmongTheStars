@@ -34,8 +34,7 @@ game.EnvironmentObject = function() {
 		p.draw = function(ctx)
 		{
 			if(this.graphicSrc !== "none") {
-				console.log(this.graphicSrc.width);
-				ctx.drawImage(this.graphicSrc, this.x, this.y);
+				ctx.drawImage(this.graphicSrc, this.x-this.graphicSrc.width/4, this.y-this.graphicSrc.height/4, this.graphicSrc.width/2, this.graphicSrc.height/2);
 			}
 		};
 
@@ -46,7 +45,8 @@ game.EnvironmentObject = function() {
 			if(this.solved)
 			{
 				// display or play an "I don't need to do that" message
-				console.log("I'm done here.");
+				game.SadSpace.textToDraw="I'm done here.";
+				game.SadSpace.textDisplayTime=50;
 			}
 			// Object is a container or somesuch rather than an inventory puzzle
 			else if(this.isPuzzle == false)
@@ -55,11 +55,22 @@ game.EnvironmentObject = function() {
 				if(this.relatedInvItem != "none")
 				{
 					game.SadSpace.inventoryObjs.push(this.relatedInvItem);
+					// now the thing is empty!
+					this.solved = true;
 				}
-				/* else
-				{console.log("beep boop I am computer");} */
-				// now the thing is empty!
-				this.solved = true;
+				else if(this.name = "Central Computer")
+				{
+					console.log("beep boop I am computer");
+					game.SadSpace.textToDraw=game.SadSpace.computer[game.SadSpace.computerClicks];
+					game.SadSpace.textDisplayTime=200;
+					game.SadSpace.computerClicks++;
+					if(game.SadSpace.computerClicks>=game.SadSpace.computer.length)
+						game.SadSpace.computerClicks=0;
+				}
+				else{
+					// now the thing is empty!
+					this.solved = true;
+				}
 			}
 			// An item is needed AND The player is using the correct inventory item on this object
 			else if(this.relatedInvItem != false && this.relatedInvItem == heldObject)

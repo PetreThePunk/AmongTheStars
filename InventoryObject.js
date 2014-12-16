@@ -40,13 +40,12 @@ game.InventoryObject = function() {
 				this.x = mouseX; this.y = mouseY;
 			}
 			
-			if(this.inInventory || location == playerLocation)
-			{
+			//if(this.inInventory || location == playerLocation)
+			//{
 				if(this.graphicSrc !== "none") {
-					console.log(this.graphicSrc.width);
-					ctx.drawImage(this.graphicSrc, this.x, this.y);
+					ctx.drawImage(this.graphicSrc, this.x-this.graphicSrc.width/4, this.y-this.graphicSrc.height/4, this.graphicSrc.width/2, this.graphicSrc.height/2);
 				}
-			}
+			//}
 		};
 
 		/* When clicked (collision check should be done in main, imo), see if

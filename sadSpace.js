@@ -24,6 +24,8 @@
 	//Ending 1: Exit the space station withOUT your space suit
 	//Ending 2: Fix ruptured pipeline and fill up fuel
 	endings: ["As you exit the station the vastness of space is spread out before you. The Red Spot of Jupiter is clearly visible below you. BREAK While you're taking in the beauty of the void you get hit by stray debris. You find yourself floating in space all alone.","You forgot your space suit. BREAK You die in seconds.","The pressure created by sealing up the broken pipe created a small explosion. Normally this might not be an issue besides singeing your eyebrows and creating a small amount of damage that could easily be fixed. BREAK But of course you filled up a nearby fuel tank with fuel. This created a bigger explosion which may or may not have killed you. BREAK BREAK Spoiler alert: it did."],
+	computer: ["Booting up...","Hello.","Errors detected in multiple sectors.","Company policy requires employees to maintain station.","A tidy employee is a happy employee.","Station Status report downloading...","Error, unauthorized user access.","Please request authorized user access error files.","If no authorized user is found, please manually discover station errors.","Pending analysis...","Intelligence check analysis complete.","Report results: Yes.","Sleep mode activated."],
+	computerClicks: 0,
 	selectedObject: undefined, // If the player clicks, what are they clicking ON?
 	mouseOnObj: false,
 	canvas: undefined,
@@ -63,7 +65,7 @@
 		this.inventoryObjs.push(wrench);
 		
 		// Speaking with your AI friend
-		var centralComputer = new game.EnvironmentObject(310, 250, "Central Computer", "none", 
+		var centralComputer = new game.EnvironmentObject(320, 200, "Central Computer", "none", 
 			"Control Room", "none", false);
 		this.environmentObjs.push(centralComputer);
 		
@@ -72,30 +74,30 @@
 			"Observatory", wrench, true);
 		this.environmentObjs.push(stuckDoor);
 		
-		var fuelReserves = new game.InventoryObject(280, 320, "Fuel", "fuel", 
+		var fuelReserves = new game.InventoryObject(467, 169, "Fuel", "fuel", 
 			"Storage", true, 1);
-		var ductTape = new game.InventoryObject(430, 290, "Duct Tape", "ductTape", 
+		var ductTape = new game.InventoryObject(539, 130, "Duct Tape", "ductTape", 
 			"Storage", true, 2);
 		this.inventoryObjs.push(fuelReserves);
 		this.inventoryObjs.push(ductTape);
 		
 		// Unlocking the airlock/engine room? door
-		var airlockKey = new game.InventoryObject(400, 250, "Key", "key", "Bedroom", true, 3);
-		var spaceSuit = new game.InventoryObject(400, 250, "Space Suit", "spacesuit", "Airlock", true, 5);
+		var airlockKey = new game.InventoryObject(139, 250, "Key", "key", "Bedroom", true, 3);
+		var spaceSuit = new game.InventoryObject(118, 160, "Space Suit", "spaceSuit", "Airlock", true, 5);
 		this.inventoryObjs.push(spaceSuit);
-		var bedroomCabniet = new game.EnvironmentObject(350, 250, "Cabinet", "none", 
+		var book = new game.EnvironmentObject(142, 54, "Book", "none", 
 			"Bedroom", airlockKey, false);
 		var doorToAirlock = new game.EnvironmentObject(10, 250, "Locked Door", "none", 
 			"Docking Bay", airlockKey, true);
 		this.environmentObjs.push(doorToAirlock);
-		this.environmentObjs.push(bedroomCabniet);
+		this.environmentObjs.push(book);
 		
 		// Fixing the engines - might need to revise this?
-		var rupturedFuelPipe = new game.EnvironmentObject(140, 250, "Ruptured Pipeline", 
+		var rupturedFuelPipe = new game.EnvironmentObject(42, 62, "Ruptured Pipeline", 
 			"pipeBusted", "Docking Bay", ductTape, true);
-		var emptyFuelTank = new game.EnvironmentObject(190, 130, "Fuel Tank (Empty)", 
+		var emptyFuelTank = new game.EnvironmentObject(276, 99, "Fuel Tank (Empty)", 
 			"fuelTank", "Docking Bay", fuelReserves, true);
-		var stuckValve = new game.EnvironmentObject(140, 275, "Stuck Valve", 
+		var stuckValve = new game.EnvironmentObject(73, 64, "Stuck Valve", 
 			"valve", "Docking Bay", wrench, true);
 		this.environmentObjs.push(rupturedFuelPipe);
 		this.environmentObjs.push(emptyFuelTank);
@@ -173,9 +175,9 @@
 			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
 			{
 				// if the player is in range of the object OR it's in the player's inventory already
-				if((self.player.inRange (self.selectedObject.x, self.selectedObject.y)) ||
-					self.selectedObject.inInventory)
-					self.selectedObject.click(self.player, 40 + 50 * self.selectedObject.id, 7 * self.HEIGHT / 8);
+				//if((self.player.inRange (self.selectedObject.x, self.selectedObject.y)) ||
+					//self.selectedObject.inInventory)
+					self.selectedObject.click(self.player, 40 + 75 * self.selectedObject.id, 7 * self.HEIGHT / 8);
 				// reset selectedObject
 				self.selectedObject = undefined;
 			}
@@ -185,7 +187,7 @@
 				self.rightBoundry = newBounds.right;
 				self.leftBoundry = newBounds.left;
 				self.topBoundry = newBounds.top;
-				self.bottomBoundry = newBounds.bottom;
+				self.bottomBoundry = newBounds.bot;
 			}
 			
 			//see if player is in space and check which ending they should receive
@@ -219,12 +221,6 @@
 		this.canvas.addEventListener("mousemove", function(e) 
 		{
 			self.mouse = self.getMouse(e);
-			
-			// if an item is being held, adjust its position accordingly
-			if(self.selectedObject && self.selectedObject instanceof game.InventoryObject)
-			{
-				self.selectedObject.draw("test location", self.mouse.x, self.mouse.y, self.ctx);
-			}
 		});
 		
 		this.update();
@@ -277,8 +273,7 @@
 		var objectIsSelected, objectsSelected=0; // used for determining which object is actually selected
 		for(var i = 0; i < this.inventoryObjs.length; i++)
 		{
-			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory){
-				
+			if(this.map.rooms[this.map.currentRoom].name == this.inventoryObjs[i].location || this.inventoryObjs[i].inInventory){				
 				this.inventoryObjs[i].draw(this.map.currentRoom, this.mouse.x, this.mouse.y, this.ctx);
 				objectIsSelected = this.drawInteractionCircle(this.inventoryObjs[i], false);
 			}
@@ -348,32 +343,38 @@
 		var distSq = ( obj.x - this.mouse.x ) * ( obj.x - this.mouse.x ) + ( obj.y - this.mouse.y ) * ( obj.y - this.mouse.y );
 		var objectIsSelected = somethingSelected; // used to update selection code
 		var colr = "#00b";
-		if(obj instanceof game.InventoryObject) 
-			colr = "#0bb";
-
-		this.ctx.fillStyle = colr;
-		
-		this.ctx.strokeStyle = colr;
-		this.ctx.lineWidth = 2;
-		this.ctx.beginPath();
-		this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
-		this.ctx.stroke();
-		this.ctx.closePath();
-		
-		if( distSq < 400 ) 
+		if(obj instanceof game.EnvironmentObject) 
 		{
+			this.ctx.fillStyle = colr;
+		
+			this.ctx.strokeStyle = colr;
+			this.ctx.globalAlpha = .5;
+			this.ctx.lineWidth = 2;
 			this.ctx.beginPath();
 			this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
-			this.ctx.fill();
+			this.ctx.stroke();
 			this.ctx.closePath();
-			
+		}		
+		if( distSq < 400 ) 
+		{
+			if(obj instanceof game.EnvironmentObject) 
+			{
+				this.ctx.beginPath();
+				this.ctx.arc( obj.x, obj.y, 20, 0, 2*Math.PI );
+				this.ctx.fill();
+				this.ctx.closePath();
+			}
 			this.selectedObject = obj; // object will be referenced on click
 			objectIsSelected = true;
 			
-			this.textToDraw=obj.name;
-			this.textDisplayTime=1;
+			if(obj.name!="Central Computer")
+			{
+				this.textToDraw=obj.name;
+				this.textDisplayTime=1;
+			}
 		}
-		
+		//reset alpha
+		this.ctx.globalAlpha = 1;		
 		this.mouseOnObj = objectIsSelected;
 		return objectIsSelected;
 	},

@@ -13,25 +13,25 @@
 	//Initialize function for the start of the game
 	init: function() {
 		this.rooms[0] = new game.Room("Docking Bay", "dockingBay",
-						{ left: 10, right: 630, top: 170, bot: 360 }, 
+						{ left: 10, right: 630, top: 130, bot: 360 }, 
 						[{ x: -100, y: 250, room: 1}, { x: 630, y: 250, room: 2}] );
 						
 		this.rooms[1] = new game.Room("Airlock", "airLock", 
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 630, y: 250, room: 0},{ x: 10, y: 250, room: 7},] );
+						[{ x: 580, y: 300, room: 0},{ x: 10, y: 300, room: 7},] );
 						
 		this.rooms[2] = new game.Room("Hallway Alpha", "hallway",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 320, y: 350, room: 0}, { x: 320, y: 250, room: 3},
-						{ x: 10, y:250, room: 4}, { x: 630, y:250, room: 5}] );
+						[{ x: 320, y: 350, room: 0}, { x: 320, y: 240, room: 3},
+						{ x: 10, y:300, room: 4}, { x: 630, y:300, room: 5}] );
 		
 		this.rooms[3] = new game.Room("Bedroom", "bedroom",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 630, y: 350, room: 2}] );
+						[{ x: 580, y: 300, room: 2}] );
 						
 		this.rooms[4] = new game.Room("Control Room", "controlRoom",
-						{ left: 10, right: 630, top: 240, bot: 360 }, 
-						[{ x: 630, y: 250, room: 2}] );
+						{ left: 100, right: 550, top: 280, bot: 360 }, 
+						[{ x: 320, y: 360, room: 2}] );
 						
 		this.rooms[5] = new game.Room("Observatory", "observatory",
 						{ left: 10, right: 630, top: 240, bot: 360 }, 
